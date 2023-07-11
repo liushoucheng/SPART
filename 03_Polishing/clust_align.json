@@ -1,0 +1,66 @@
+#snakemake  --cluster-config clust.json --cluster '{cluster.account}'
+{
+    "__default__" :
+    {
+        "account" : "sbatch -N 1 -n 1 -c 32 -p tcum256c128Partition",
+        "jobs" : "59"
+    },
+        "filter_merge" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "merge" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "filter_merge_flagstat" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "filter_merge_single" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "merge_flagstat" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "filter_merge_single_flagstat" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "merge_stat" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "filter_merge_single_pcr" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "filter_merge_hybrid" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 128 -p tcuHm512c128Partition",
+        "jobs" : "59"
+    },
+        "pcr_free_single" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 96 -p fatM4TC96Partition",
+        "jobs" : "59"
+    },
+        "pcr_free_hybrid" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 96 -p fatM4TC96Partition",
+        "jobs" : "59"
+    },
+}
+#snakemake -j 999 --cluster-config cluster.json --cluster "{cluster.account} -p {cluster.partition} -n {cluster.n}  -t {cluster.time}"
+#--cluster "sbatch -A {cluster.account} -q {cluster.queue} -l select={cluster.nodes}:ncpus{cluster.ppn}:mem={cluster.mem} -l walltime={cluster.time}"
+#nohup snakemake -s sum.py --cluster-config clust.json --use-conda --cluster '{cluster.account}' --jobs 16 --restart-times 5 --conda-prefix /lustre1/deng_pkuhpc/deng_test/SF/min3/envs/map&

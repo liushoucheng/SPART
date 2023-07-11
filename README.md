@@ -1,0 +1,35 @@
+# Assemble pipeline
+## dependence 
+snakemake v7.21.0 https://snakemake.github.io
+## Contig screen
+### fastp
+SPART/00_Contig_screen/fastp.sh $HiFi_reads $ONT_reads
+### Hifiasm
+SPART/00_Contig_screen/hifiasm.sh $HiFi_reads $ONT_reads $output_prefix
+### Verkko
+SPART/00_Contig_screen/verkko.sh $output_prefix $HiFi_reads $ONT_reads $threads $memory
+### Flye
+SPART/00_Contig_screen/flye.sh $ONT_reads $output_prefix $threads
+### RM MT & CP
+SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
+## Contig scaffolding
+### Bionano
+SPART/01_Contig_scaffolding/Bionano_DLS_map.sh threads bnx ref_cmap prefix xml Bio_dir cluster_xml ref bio_camp merge_xml RefAligner
+### Hi-C
+SPART/01_Contig_scaffolding/HiC-Pro.sh ref ref_prefix hicpro_data hicpro_config hicpro_outdir
+SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
+## Gap patching
+SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
+## Polishing
+SPART/03_Polishing/calsv_snv.sh workdir ref threads
+## Evaluation
+### BUSCO
+SPART/04_Evaluation/BUSCO.sh ref prefix
+### mapping rates & coverages
+SPART/04_Evaluation/mapping_rates_coverages.sh hybrid_bam single_bam ont_bam
+### LTR
+SPART/04_Evaluation/lte.sh ref prefix
+### QV
+SPART/04_Evaluation/qv.sh query ref
+### BACs
+SPART/04_Evaluation/bac.sh bac_reads ref_chr
