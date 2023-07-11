@@ -13,7 +13,7 @@ SPART/00_Contig_screen/hifiasm.sh $HiFi_reads $ONT_reads $output_prefix
 SPART/00_Contig_screen/verkko.sh $output_prefix $HiFi_reads $ONT_reads $threads $memory
 ### Flye
 SPART/00_Contig_screen/flye.sh $ONT_reads $output_prefix $threads
-### RM MT & CP
+### Remove MT & CP
 SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
 ## 01_Contig scaffolding
 ### Bionano
