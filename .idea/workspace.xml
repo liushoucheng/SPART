@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f07db22c-ad58-41e4-b700-898070c7a210" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/02_Gap_patching/wfmash_ragtag.sh" afterDir="false" />
-    </list>
+    <list default="true" id="f07db22c-ad58-41e4-b700-898070c7a210" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +43,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689095297082</updated>
       <workItem from="1689095300166" duration="16000" />
-      <workItem from="1689095336176" duration="2265000" />
+      <workItem from="1689095336176" duration="2971000" />
     </task>
     <servers />
   </component>
