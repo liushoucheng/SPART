@@ -14,17 +14,19 @@ conda activate spart
 
 ### Dependencies
 
-Bionano DLS map https://bionano.com
+List of tools assumed loadable or accessible with no path are:
 
-HiC-Pro v3.1.0 https://github.com/nservant/HiC-Pro
+* [Bionano DLS map]( https://bionano.com)
 
-DeepVariant v1.5.0-gpu https://github.com/google/deepvariant
+* [HiC-Pro v3.1.0]( https://github.com/nservant/HiC-Pro)
 
-PEPPER-Margin-DeepVariant v0.8-gpu https://github.com/kishwarshafin/pepper
+* [DeepVariant v1.5.0-gpu]( https://github.com/google/deepvariant)
 
-hap.py v0.3.15 https://github.com/Illumina/hap.py
+* [PEPPER-Margin-DeepVariant v0.8-gpu]( https://github.com/kishwarshafin/pepper)
 
-vcf_merge_t2t.py https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py
+* [hap.py v0.3.15]( https://github.com/Illumina/hap.py)
+
+* [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
 ### Running pipeline with snakemake:
 
