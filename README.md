@@ -28,7 +28,7 @@ List of tools assumed loadable or accessible with no path are:
 
 * [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
-### Running pipeline with snakemake:
+### Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Variant calls and Evaluation):
 
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1
 
