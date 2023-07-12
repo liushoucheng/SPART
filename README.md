@@ -9,7 +9,7 @@ cd SPART
 
 conda env create -f SPART.yaml
 
-Running pipeline with snakemake
+Running pipeline with snakemake:
 
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1
 
