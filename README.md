@@ -14,6 +14,9 @@ snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cl
 configfile:The config file can be used to define a dictionary of configuration parameters and their values.
 
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
+
+## Run:
+
 ## 00_Contig screen
 ### Fastp :was used to filter adapter sequences, primers and other low quality sequence from raw sequencing reads.
 SPART/00_Contig_screen/fastp.sh $HiFi_reads $ONT_reads
