@@ -2,8 +2,13 @@
 SPART, a Semi-automated pipeline for assembling reference sequence of telomere-to-telomere (T2T). 
 <img width="703" alt="image" src="https://github.com/liushoucheng/SPART/assets/50602960/254b12f0-f3c7-4201-b9d2-f4a49876dd66">
 
-## dependence 
-snakemake v7.21.0 https://snakemake.github.io
+## Quick install and start
+git clone https://github.com/liushoucheng/SPART.git
+cd SPART
+conda env create -f SPART.yaml
+snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1
+configfile:The config file can be used to define a dictionary of configuration parameters and their values.
+cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ## 00_Contig screen
 ### Fastp :was used to filter adapter sequences, primers and other low quality sequence from raw sequencing reads.
 SPART/00_Contig_screen/fastp.sh $HiFi_reads $ONT_reads
