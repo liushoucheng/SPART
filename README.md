@@ -31,7 +31,7 @@ SPART/04_Evaluation/BUSCO.sh ref prefix
 ### mapping rates & coverages
 SPART/04_Evaluation/mapping_rates_coverages.sh hybrid_bam single_bam ont_bam
 ### LTR
-SPART/04_Evaluation/lte.sh ref prefix
+SPART/04_Evaluation/ltr.sh ref prefix
 ### QV
 SPART/04_Evaluation/qv.sh query ref
 ### BACs
