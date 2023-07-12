@@ -10,7 +10,21 @@ cd SPART
 
 conda env create -f SPART.yaml
 
-conda activate spart
+cd ..
+
+### Dependencies
+
+Bionano DLS map https://bionano.com
+
+HiC-Pro v3.1.0 https://github.com/nservant/HiC-Pro
+
+DeepVariant v1.5.0-gpu https://github.com/google/deepvariant
+
+PEPPER-Margin-DeepVariant v0.8-gpu https://github.com/kishwarshafin/pepper
+
+hap.py v0.3.15 https://github.com/Illumina/hap.py
+
+vcf_merge_t2t.py https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py
 
 ### Running pipeline with snakemake:
 
