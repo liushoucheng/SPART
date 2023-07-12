@@ -20,6 +20,7 @@ SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
 SPART/01_Contig_scaffolding/Bionano_DLS_map.sh threads bnx ref_cmap prefix xml Bio_dir cluster_xml ref bio_camp merge_xml RefAligner
 ### Hi-C
 SPART/01_Contig_scaffolding/HiC-Pro.sh ref ref_prefix hicpro_data hicpro_config hicpro_outdir
+
 SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
 ## 02_Gap patching
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
