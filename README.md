@@ -17,7 +17,7 @@ configfile:The config file can be used to define a dictionary of configuration p
 
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 
-## Run:
+## Run step by step:
 
 ## 00_Contig screen
 ### Fastp :was used to filter adapter sequences, primers and other low quality sequence from raw sequencing reads.
