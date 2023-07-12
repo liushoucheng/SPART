@@ -10,7 +10,7 @@ cd SPART
 
 conda env create -f SPART.yaml
 
-cd ..
+conda activate spart
 
 ### Dependencies
 
