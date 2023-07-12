@@ -3,13 +3,16 @@ SPART, a Semi-automated pipeline for assembling reference sequence of telomere-t
 <img width="703" alt="image" src="https://github.com/liushoucheng/SPART/assets/50602960/254b12f0-f3c7-4201-b9d2-f4a49876dd66">
 
 ## Quick install and start
+### Install
 git clone https://github.com/liushoucheng/SPART.git
 
 cd SPART
 
 conda env create -f SPART.yaml
 
-Running pipeline with snakemake:
+conda activate spart
+
+### Running pipeline with snakemake:
 
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1
 
