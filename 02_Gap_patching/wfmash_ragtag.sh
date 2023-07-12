@@ -15,4 +15,4 @@ ln -s "$prefix".fa query.fasta
 
 ragtag.py patch -f 10000 --remove-small ref.fasta query.fasta
 
-
+_submit_telomere.sh ragtag_output/ragtag.patch.fasta #(https://github.com/VGP/vgp-assembly)

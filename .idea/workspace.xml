@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f07db22c-ad58-41e4-b700-898070c7a210" name="Changes" comment="" />
+    <list default="true" id="f07db22c-ad58-41e4-b700-898070c7a210" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Contig_scaffolding/hicpro_config.txt.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/02_Gap_patching/wfmash_ragtag.sh" beforeDir="false" afterPath="$PROJECT_DIR$/02_Gap_patching/wfmash_ragtag.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SPART.py" beforeDir="false" afterPath="$PROJECT_DIR$/SPART.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
