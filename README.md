@@ -5,7 +5,7 @@ SPART, a Semi-automated pipeline for assembling reference sequence of telomere-t
 ## dependence 
 snakemake v7.21.0 https://snakemake.github.io
 ## 00_Contig screen
-### fastp
+### Fastp :was used to filter adapter sequences, primers and other low quality sequence from raw sequencing reads.
 SPART/00_Contig_screen/fastp.sh $HiFi_reads $ONT_reads
 ### Hifiasm
 SPART/00_Contig_screen/hifiasm.sh $HiFi_reads $ONT_reads $output_prefix
