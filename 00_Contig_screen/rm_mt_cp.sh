@@ -13,4 +13,4 @@ python gemma_los.py chloroplast.paf > chloroplast.txt
 
 seqkit grep -v -f chloroplast.txt $ref > wheat_remove_cp.fa
 
-seqkit grep -v -f mitochondrion.txt $ref > wheat_remove_mt.fa
+seqkit grep -v -f mitochondrion.txt wheat_remove_cp.fa > wheat_remove_cp_mt.fa
