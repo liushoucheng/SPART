@@ -20,7 +20,7 @@ List of tools assumed loadable or accessible with no path are:
 
 * [HiC-Pro v3.1.0]( https://github.com/nservant/HiC-Pro)
 
-* [VGP telomere pipeline]( https://github.com/VGP/vgp-assembly)
+* [_submit_telomere.sh]( https://github.com/VGP/vgp-assembly/blob/master/pipeline/telomere/_submit_telomere.sh)
 
 * [Medaka]( https://anaconda.org/bioconda/medaka)
 
@@ -65,23 +65,27 @@ SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
 ### 02_Gap patching
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
 #### telomere patching
-We used telomeres identified in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on minimap2 alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka v1.0.3:
+We used _submit_telomere.sh in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on minimap2 alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka:
 
-medaka -v -i reads.fasta -d template.fasta -o medaka.fasta
+medaka -v -i ONT_tel_reads.fasta -d longest_ont_tel.fasta -o ont_tel_medaka.fasta
 
 Telomere signal in all HiFi reads was identified with the commands:
 
-_submit_telomere.sh reads.fasta
+_submit_telomere.sh hifi_reads.fasta
 
-Additional HiFi reads were recruited from a manual analysis of the simplified version of the string graph. We looked for trimmed tips that could extend. All reads had telomere signal and were aligned to the medaka consensus and polished with Racon with the commands:
+Additional HiFi reads were recruited from a manual analysis. We looked for trimmed tips that could extend. All reads had telomere signal and were aligned to the medaka consensus and polished with Racon with the commands:
 
-minimap2 -t16 -ax map-pb medaka.fasta hifi_tel.fastq > medaka.sam
+minimap2 -t16 -ax map-pb ont_tel_medaka.fasta hifi_tel.fasta > medaka.sam
 
-racon hifi_tel.fastq medaka.sam medaka.fa > racon.fasta
+racon hifi_tel.fasta medaka.sam ont_tel_medaka.fasta > racon.fasta
 
 Finally, the polished result was patched into the assembly with ragtag patch or manually patched.
 ##### Citation
 https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
+#### Centromeric region analysis
+
+SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1 CHIP2 threads
+
 ### 03_Polishing
 SPART/03_Polishing/calsv_snv.sh workdir ref threads
 ### 04_Evaluation
