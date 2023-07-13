@@ -20,6 +20,12 @@ List of tools assumed loadable or accessible with no path are:
 
 * [HiC-Pro v3.1.0]( https://github.com/nservant/HiC-Pro)
 
+* [VGP telomere pipeline]( https://github.com/VGP/vgp-assembly)
+
+* [Medaka]( https://anaconda.org/bioconda/medaka)
+
+* [racon]( https://anaconda.org/bioconda/racon)
+
 * [DeepVariant v1.5.0-gpu]( https://github.com/google/deepvariant)
 
 * [PEPPER-Margin-DeepVariant v0.8-gpu]( https://github.com/kishwarshafin/pepper)
@@ -59,19 +65,20 @@ SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
 ### 02_Gap patching
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
 #### telomere patching
-We used telomeres identified in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on GraphAligner alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka v1.0.3:
+We used telomeres identified in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on minimap2 alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka v1.0.3:
 
 medaka -v -i reads.fasta -d template.fasta -o medaka.fasta
+
 Telomere signal in all HiFi reads was identified with the commands:
 
-find hifi_20kb.fasta > telomere
-java -cp telomere.jar FindTelomereWindows telomere 99.9 > windows
-cat windows |awk '{if ($NF > 0.5) print $2"\t"$4"\t"$5"\t"$3"\t"$NF}'| \
-  sed s/\>//g | bedtools merge -d 500 -i - -c 4 -o distinct > telomere
+_submit_telomere.sh reads.fasta
+
 Additional HiFi reads were recruited from a manual analysis of the simplified version of the string graph. We looked for trimmed tips that could extend. All reads had telomere signal and were aligned to the medaka consensus and polished with Racon with the commands:
 
 minimap2 -t16 -ax map-pb medaka.fasta hifi_tel.fastq > medaka.sam
+
 racon hifi_tel.fastq medaka.sam medaka.fa > racon.fasta
+
 Finally, the polished result was patched into the assembly with ragtag patch or manually patched.
 ##### Citation
 https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
