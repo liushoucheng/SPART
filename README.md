@@ -26,6 +26,8 @@ List of tools assumed loadable or accessible with no path are:
 
 * [racon]( https://anaconda.org/bioconda/racon)
 
+* [hisat2]( https://github.com/DaehwanKimLab/hisat2)
+
 * [DeepVariant v1.5.0-gpu]( https://github.com/google/deepvariant)
 
 * [PEPPER-Margin-DeepVariant v0.8-gpu]( https://github.com/kishwarshafin/pepper)
