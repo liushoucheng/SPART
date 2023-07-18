@@ -176,7 +176,7 @@ rule ragtag_patch_flye:
 
 rule ragtag_patch_verkko:
     input:
-        single_hybrid_flye=W + "patch_hybrid/patch_single_hybrid.fa",
+        single_hybrid_flye=W + "patch_flye/patch_single_hybrid_flye.fa",
         verkko=verkko_fa
     output:
         ref=W + "patch_verkko/patch_single_hybrid_flye_verkko.fa",
