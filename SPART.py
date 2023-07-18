@@ -174,7 +174,7 @@ rule ragtag_patch_flye:
         cp {params.dir}/ragtag_output/ragtag.patch.fasta {output}
         """
 
-rule ragtag_patch_verkko
+rule ragtag_patch_verkko:
     input:
         single_hybrid_flye=W + "patch_hybrid/patch_single_hybrid.fa",
         verkko=verkko_fa
