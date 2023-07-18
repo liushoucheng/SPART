@@ -38,7 +38,7 @@ rule final:
         W+"hybrid_hifi_pcr/hybrid.bam",
         W + "ont_merge/q10l120k.bam"
 
-rule hybrid_fastp:
+rule hifi_fastp:
     input:
         HiFi_hybrid_all
     output:
@@ -54,7 +54,7 @@ rule ont_fastp:
     shell:
         "fastp -q 10 -l 100000 -w 16 -i {input} -o {output}"
 
-rule hifiasm_hybrid:
+rule hifiasm:
     input:
         hifi=W+"fastp/hybrid.fq",
         ont=W+"fastp/ont.fq"
@@ -82,7 +82,7 @@ rule flye:
         flye --nano-hq {input} --read-error 0.1 -g 5.4g --asm-coverage 80 --scaffold --out-dir flye --threads 96 --no-alt-contigs
         """
 
-rule rm_mt_cp_hifiasm_hybrid:
+rule rm_mt_cp:
     input:
         hybrid=W+"hifiasm_hybrid/hybrid.all.asm.p_ctg.fa",
         mt=mitochondrion,
@@ -102,7 +102,7 @@ rule rm_mt_cp_hifiasm_hybrid:
         seqkit grep -v -f mitochondrion.txt wheat_remove_cp.fa > {output}
         """
 
-rule hicpro_hybrid:
+rule hicpro:
     input:
         hic=hic_hybrid_dir,
         ref=W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
@@ -136,7 +136,7 @@ rule hicpro_hybrid:
         samtools merge -@ 96 -o {output} {params.dir}/bowtie_results/bwt2/*/*.bwt2pairs.bam.bam
         """
 
-rule yahs_hybrid:
+rule yahs:
     input:
         bam=W+"hic_hybrid/hic_hybrid.bam",
         ref=W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
@@ -153,7 +153,7 @@ rule yahs_hybrid:
         cp {params.dir}/yahs_bam_scaffolds_final.fa ./yahs_hybrid.fa
         """
 
-rule ragtag_patch_flye:
+rule patch_flye:
     input:
         single_hybrid=W + "yahs_hybrid/yahs_hybrid.fa",
         flye=W + "flye/assembly.fasta"
@@ -174,7 +174,7 @@ rule ragtag_patch_flye:
         cp {params.dir}/ragtag_output/ragtag.patch.fasta {output}
         """
 
-rule ragtag_patch_verkko:
+rule patch_verkko:
     input:
         single_hybrid_flye=W + "patch_flye/patch_single_hybrid_flye.fa",
         verkko=verkko_fa
@@ -199,7 +199,7 @@ rule ragtag_patch_verkko:
         meryl print greater-than distinct=0.9998 merylDB > {output.txt}
         """
 
-rule minimap_cu_mix:
+rule minimap_hifi:
     input:
         fq=W+"fastp/hybrid.fq",
         ref=W + "patch_verkko/patch_single_hybrid_flye_verkko.fa",
@@ -213,7 +213,7 @@ rule minimap_cu_mix:
         winnowmap --MD -W {input.txt} -ax map-pb -H -K 1500M -k 27 -w27 -t32 {input.ref} {input.fq} > {output.sam}
         """
 
-rule hifi_mix_sort:
+rule minimap_hifi_sort:
     input:
         W+"hifi_mix_winnowmap/{hifi_mix}_q40l15k.sam"
     output:
@@ -225,7 +225,7 @@ rule hifi_mix_sort:
     shell:
         "samtools view -@32 -bt {params} {input}|samtools sort -@32 -m1500M -O bam -o {output} -"
 
-rule filter:
+rule minimap_hifi_filter:
     input:
         W+"hifi_mix_sort/{hifi_mix}_q40l15k.bam"
     output:
@@ -235,7 +235,7 @@ rule filter:
     shell:
         "samtools view -@32 -F0x104 -hb {input} > {output}"
 
-rule filter_merge:
+rule minimap_hifi_filter:
     input:
         expand(W+"hifi_mix_sort_filter/{hifi_mix}_q40l15k.bam",hifi_mix=hifi_mix)
     output:
@@ -245,7 +245,7 @@ rule filter_merge:
     shell:
         "samtools merge -@ 128 -l 0 {output} {input}"
 
-rule pcr_free_hybrid:
+rule pcr_free:
     input:
         fa=W + "patch_verkko/patch_single_hybrid_flye_verkko.fa",
         r1=pcrfree_hybrid_r1,
@@ -255,7 +255,7 @@ rule pcr_free_hybrid:
     shell:
        "bwa-mem2.avx512bw mem -t 96 {input.fa} {input.r1} {input.r2}|samtools view -@ 96 -b -|samtools sort -@ 96 -m 30G -o {output} -"
 
-rule filter_merge_hybrid:
+rule minimap_hifi_filter_pcr_merge:
     input:
         hifi=expand(W+"hifi_mix_sort_filter/{hifi_mix}_q40l15k.bam",hifi_mix=hifi_mix),
         pcr=W+"hybrid_hifi_pcr/pcr.bam"
@@ -266,7 +266,7 @@ rule filter_merge_hybrid:
     shell:
         "samtools merge -@ 128 -l 0 {output} {input.hifi} {input.pcr}"
 
-rule minimap_cu_ont:
+rule minimap_ont:
     input:
         fq=W+"fastp/ont.fq",
         ref=W + "patch_verkko/patch_single_hybrid_flye_verkko.fa",
@@ -278,7 +278,7 @@ rule minimap_cu_ont:
     shell:
         "winnowmap --MD -W {input.txt} -ax map-ont -H -K 1500M -k 27 -w27 -t32 {input.ref} {input.fq} > {output}"
 
-rule sort:
+rule minimap_ont_sort:
     input:
         W+"ont_winnowmap/{e}/{e}_q10l120k.sam"
     output:
@@ -290,7 +290,7 @@ rule sort:
     shell:
         "samtools view -@32 -bt {params} {input}|samtools sort -@32 -m1500M -O bam -o {output} -"
 
-rule filter_ont:
+rule minimap_ont_sort_filter:
     input:
         W+"ont_sort/{e}/{e}_q10l120k.bam"
     output:
@@ -300,7 +300,7 @@ rule filter_ont:
     shell:
         "samtools view -@ 128 -F0x104 -hb {input} > {output}"
 
-rule merge:
+rule minimap_ont_sort_filter_merge:
     input:
         expand(W+"ont_filter/{e}_q10l120k.bam",e=e)
     output:
