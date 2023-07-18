@@ -225,7 +225,7 @@ rule minimap_hifi_sort:
     shell:
         "samtools view -@32 -bt {params} {input}|samtools sort -@32 -m1500M -O bam -o {output} -"
 
-rule minimap_hifi_filter:
+rule minimap_hifi_sort_filter:
     input:
         W+"hifi_mix_sort/{hifi_mix}_q40l15k.bam"
     output:
@@ -235,7 +235,7 @@ rule minimap_hifi_filter:
     shell:
         "samtools view -@32 -F0x104 -hb {input} > {output}"
 
-rule minimap_hifi_filter:
+rule minimap_hifi_sort_filter_merge:
     input:
         expand(W+"hifi_mix_sort_filter/{hifi_mix}_q40l15k.bam",hifi_mix=hifi_mix)
     output:
