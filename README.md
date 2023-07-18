@@ -55,7 +55,7 @@ configfile:The config file can be used to define a dictionary of configuration p
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 
 #### Output files
-Workdir/fastp:Filtered adapter sequences, primers and other low quality 
+* **Workdir/fastp:**Filtered adapter sequences, primers and other low quality 
 sequence from raw HiFi and ONT sequencing reads.
 
 Workdir/hifiasm_hybrid/hybrid.all.asm.p_ctg.fa:Hifiasm generated a preliminary contig genome assembly.
