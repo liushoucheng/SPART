@@ -1,13 +1,13 @@
 HiFi_reads_merge:
- SPART_PATH/SPART/exmple/hifi/HiFi.fastq
+ SPART_PATH/exmple/hifi/HiFi.fastq
 ONT_reads_merge:
- SPART_PATH/SPART/exmple/ont/ONT.fastq
+ SPART_PATH/exmple/ont/ONT.fastq
 mitochondrion:
- SPART_PATH/SPART/exmple/mt/mitochondrion.fasta
+ SPART_PATH/exmple/mt/mitochondrion.fasta
 chloroplast:
- SPART_PATH/SPART/exmple/cp/chloroplast.fasta
+ SPART_PATH/exmple/cp/chloroplast.fasta
 hic_dir:
- SPART_PATH/SPART/exmple/hic
+ SPART_PATH/exmple/hic
 SPART_dir:
  SPART_PATH
 hic_enzyme:
@@ -15,16 +15,16 @@ hic_enzyme:
 hic_enzyme_ligation_site:
  hic_sca_ligation_site
 verkko_assemble:
- SPART_PATH/SPART/exmple/verkko/verkko.fasta
+ SPART_PATH/exmple/verkko/verkko.fasta
 pcrfree_r1:
- SPART_PATH/SPART/exmple/pcr/PCRFREE_1.fq
+ SPART_PATH/exmple/pcr/PCRFREE_1.fq
 pcrfree_r2:
- SPART_PATH/SPART/exmple/pcr/PCRFREE_2.fq
+ SPART_PATH/exmple/pcr/PCRFREE_2.fq
 google_deepvariant_latest-gpu_sif:
  google_deepvariant_latest_gpu_sif
 DIR:
- SPART_PATH/SPART/exmple/hifi
+ SPART_PATH/exmple/hifi
 DIRont:
- SPART_PATH/SPART/exmple/ont
+ SPART_PATH/exmple/ont
 WORKDIR:
- SPART_PATH/SPART/exmple/test/
+ SPART_PATH/exmple/test/
