@@ -48,7 +48,7 @@ HiC_ligation_site=" GATCGATC"
 
 sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml
 
-snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np
+snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tsvg > rule.svg
 
 configfile:The config file can be used to define a dictionary of configuration parameters and their values.
 
