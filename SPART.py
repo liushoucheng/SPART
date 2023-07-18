@@ -201,7 +201,7 @@ rule ragtag_patch_verkko:
 
 rule minimap_cu_mix:
     input:
-        fq=W+"hifi_mix_reads/{hifi_mix}_q40l15k.fastq",
+        fq=W+"fastp/hybrid.fq",
         ref=W + "patch_verkko/patch_single_hybrid_flye_verkko.fa",
         txt = W + "repetitive_k27.txt"
     output:
@@ -268,7 +268,7 @@ rule filter_merge_hybrid:
 
 rule minimap_cu_ont:
     input:
-        fq=W+"ont/reads/{e}_q10l120k.fastq",
+        fq=W+"fastp/ont.fq",
         ref=W + "patch_verkko/patch_single_hybrid_flye_verkko.fa",
         txt=W+"repetitive_k27.txt"
     output:
