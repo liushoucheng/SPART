@@ -55,7 +55,8 @@ configfile:The config file can be used to define a dictionary of configuration p
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ![image](https://github.com/liushoucheng/SPART/blob/main/pic/rule.png)
 #### Output files
-please see the complete * [documentation]( https://github.com/liushoucheng/SPART/tree/main/exmple).
+
+please see the complete [documentation]( https://github.com/liushoucheng/SPART/tree/main/exmple).
 
 ## Run step by step:
 
