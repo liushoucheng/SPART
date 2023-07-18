@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f07db22c-ad58-41e4-b700-898070c7a210" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/SPART.py" beforeDir="false" afterPath="$PROJECT_DIR$/SPART.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1689602086247</updated>
-      <workItem from="1689602089585" duration="8161000" />
+      <workItem from="1689602089585" duration="10724000" />
     </task>
     <servers />
   </component>
