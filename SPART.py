@@ -66,7 +66,7 @@ rule hifiasm_hybrid:
         """
         cd {params}
         hifiasm -o hybrid.all.asm --primary -t 96 --ul {input.ont} -k 63 {input.hifi}
-        awk '/^S/{print ">"$2;print $3}' hybrid.all.asm.p_ctg.gfa > {output}
+        awk '/^S/{{print ">"$2;print $3}}' hybrid.all.asm.p_ctg.gfa > {output}
         """
 
 rule flye:
@@ -120,7 +120,7 @@ rule hicpro_hybrid:
         ln -s {input.ref} ./
         bowtie2-build --large-index --threads 96 {params.prefix}.fa {params.prefix}
         samtools faidx {params.prefix}.fa
-        awk '{print $1 "\t" $2}' {params.prefix}.fa.fai > genome_sizes.bed
+        awk '{{print $1 "\t" $2}}' {params.prefix}.fa.fai > genome_sizes.bed
         python ./HiC-Pro/bin/utils/digest_genome.py -r ^{params.enzyme} -o enzyme.bed {params.prefix}.fa
         makeblastdb -in {params.prefix}.fa -dbtype nucl -parse_seqids -out {params.prefix}
         cp {params.spart_dir}/01_Contig_scaffolding/hicpro_config.txt ./
@@ -194,7 +194,7 @@ rule ragtag_patch_verkko:
         cd ..
         ragtag.py patch -f 10000 --remove-small {input.single_hybrid_flye} {input.verkko}
         cp {params.dir}/ragtag_output/ragtag.patch.fasta {output.ref}
-        bwa-mem2.avx512bw index {input.ref}
+        bwa-mem2.avx512bw index {output.ref}
         meryl count k=27 output merylDB {output.ref}
         meryl print greater-than distinct=0.9998 merylDB > {output.txt}
         """
