@@ -6,7 +6,7 @@ mitochondrion:
  SPART_PATH/SPART/exmple/mt/mitochondrion.fasta
 chloroplast:
  SPART_PATH/SPART/exmple/cp/chloroplast.fasta
-hic_hybrid_dir:
+hic_dir:
  SPART_PATH/SPART/exmple/hic
 SPART_dir:
  SPART_PATH
