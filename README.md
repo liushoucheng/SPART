@@ -38,6 +38,16 @@ List of tools assumed loadable or accessible with no path are:
 
 ### Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
 
+sed -i "s#^ SPART_PATH#${PWD}#g" conf_ck.yaml
+
+HiC_enzyme=GATC
+
+sed -i "s#^ hic_sca_enzyme#${HiC_enzyme}#g" conf_ck.yaml
+
+HiC_ligation_site=GATCGATC
+
+sed -i "s#^ hic_sca_ligation_site#${HiC_ligation_site}#g" conf_ck.yaml
+
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1
 
 configfile:The config file can be used to define a dictionary of configuration parameters and their values.
