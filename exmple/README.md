@@ -1,3 +1,11 @@
+# Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
+sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml
+
+snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tsvg > rule.svg
+
+configfile:The config file can be used to define a dictionary of configuration parameters and their values.
+
+cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 # Output files
 **Workdir/fastp**:Filtered adapter sequences, primers and other low quality 
 sequence from raw HiFi and ONT sequencing reads.
