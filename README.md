@@ -56,8 +56,8 @@ cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'f
 <div align=center>
 <img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">/>
 </div>
-#### Output files
 
+#### Output files
 please see the complete [documentation]( https://github.com/liushoucheng/SPART/tree/main/exmple).
 
 ## Run step by step:
