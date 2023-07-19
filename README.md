@@ -54,6 +54,7 @@ configfile:The config file can be used to define a dictionary of configuration p
 
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 <div align=center>
+<img src="https://github.com/BIT-MJY/Active-SLAM-Based-on-Information-Theory/blob/master/img/1-2.png">/>
 ![image](https://github.com/liushoucheng/SPART/blob/main/pic/rule.png)
 </div>
 #### Output files
