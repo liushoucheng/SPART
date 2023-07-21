@@ -54,7 +54,7 @@ configfile:The config file can be used to define a dictionary of configuration p
 
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 <div align=center>
-<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">/>
+<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">
 </div>
 
 #### Output files
@@ -82,6 +82,19 @@ SPART/01_Contig_scaffolding/HiC-Pro.sh ref ref_prefix hicpro_data hicpro_config 
 SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
 ### 02_Gap patching
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
+
+#### Manual operation
+
+cd ragtag_output
+
+perl SPART/02_Gap_patching/paf_filter.pl -i ragtag.patch.debug.filtered.paf -minlen 10000000 -iden 0.5
+
+**Keep the high-quality contig in ragtag.patch.debug.filtered.paf that matches the sequence at both ends of the gap.**
+
+perl SPART/02_Gap_patching/renameagp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch.debug.filtered.paf -start seq00000000 -end seq00000001 -o test.agp
+
+**Test.agp is merged into ragtag.patch.agp and fasta is generated.**
+
 #### telomere patching
 We used _submit_telomere.sh in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on minimap2 alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka:
 

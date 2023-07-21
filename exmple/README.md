@@ -32,5 +32,5 @@ snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cl
 **Workdir/ont_merge/q10l120k.bam**:Alignment data file between patch_single_hybrid_flye_verkko.fa and ONT reads.
 
 <div align=center>
-<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule_test.png">/>
+<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule_test.png">
 </div>
