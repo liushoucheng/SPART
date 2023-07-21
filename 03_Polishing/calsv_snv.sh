@@ -35,3 +35,6 @@ singularity run --cpus $threads --nv -B /home:/home -B /data:/data -B "$input":"
 docker run --ipc=host --gpus all -v /home:/home -v /data:/data -v "$input":"$input" -v "$output":"$output" kishwars/pepper_deepvariant:r0.8-gpu run_pepper_margin_deepvariant call_variant -b "$input"/q10l120k.bam -f $ref -o "$output"/pepper_deepvariant_output -g -p pep_dv_ont -t $threads --ont_r9_guppy5_sup
 
 snakemake -s callsv_snv.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs 128 --rerun-incomplete --restart-times 1
+
+####filter & consensus
+snakemake -s callsv_snv.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs 128 --rerun-incomplete --restart-times 1
