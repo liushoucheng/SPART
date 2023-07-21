@@ -89,7 +89,7 @@ cd ragtag_output
 
 perl SPART/02_Gap_patching/paf_filter.pl -i ragtag.patch.debug.filtered.paf -minlen 10000000 -iden 0.5
 
-**Keep the high-quality contig in ragtag.patch.debug.filtered.paf that matches the sequence at both ends of the gap.**
+**Manually editing the ragtag.patch.debug.filtered.paf file.Keep the high-quality contig and preserve the location of the only high confidence match in ragtag.patch.debug.filtered.paf that matches the sequence at both ends of the gap.**
 
 perl SPART/02_Gap_patching/renameagp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch.debug.filtered.paf -start seq00000000 -end seq00000001 -o test.agp
 
