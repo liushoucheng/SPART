@@ -1,0 +1,18 @@
+#snakemake  --cluster-config clust.json --cluster '{cluster.account}'
+{
+    "__default__" :
+    {
+        "account" : "sbatch -N 1 -n 1 -c 96 -p Partition",
+        "jobs" : "59"
+    },
+        "hifi_fastp" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 16 -p Partition",
+        "jobs" : "59"
+    },
+        "ont_fastp" :
+    {
+       "account" : "sbatch -N 1 -n 1 -c 16 -p Partition",
+        "jobs" : "59"
+    },
+}

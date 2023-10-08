@@ -1,0 +1,11 @@
+#snakemake  --cluster-config clust.json --cluster '{cluster.account}'
+{
+    "__default__" :
+    {
+        "account" : "sbatch -N 1 -n 1 -c 128 -p tcum256c128Partition",
+        "jobs" : "59"
+    },
+}
+#snakemake -j 999 --cluster-config cluster.json --cluster "{cluster.account} -p {cluster.partition} -n {cluster.n}  -t {cluster.time}"
+#--cluster "sbatch -A {cluster.account} -q {cluster.queue} -l select={cluster.nodes}:ncpus{cluster.ppn}:mem={cluster.mem} -l walltime={cluster.time}"
+#nohup snakemake -s sum.py --cluster-config clust.json --use-conda --cluster '{cluster.account}' --jobs 16 --restart-times 5 --conda-prefix /lustre1/deng_pkuhpc/deng_test/SF/min3/envs/map&
