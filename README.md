@@ -130,3 +130,6 @@ SPART/04_Evaluation/ltr.sh ref prefix
 SPART/04_Evaluation/qv.sh query ref
 #### BACs
 SPART/04_Evaluation/bac.sh bac_reads ref_chr
+### Addition
+SPART/04_Evaluation/while threads partition ref query
+
