@@ -131,5 +131,6 @@ SPART/04_Evaluation/qv.sh query ref
 #### BACs
 SPART/04_Evaluation/bac.sh bac_reads ref_chr
 ### Addition
-SPART/04_Evaluation/while threads partition ref query
-
+SPART/04_Evaluation/while.sh threads partition ref query
+### Analysis of synteny
+SPART/04_Evaluation/synteny.sh protein name gff3
