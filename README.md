@@ -2,8 +2,22 @@
 SPART, a Semi-automated pipeline for assembling reference sequence of telomere-to-telomere (T2T). 
 ![image](https://github.com/liushoucheng/SPART/blob/main/pic/pipeline.jpg)
 
-## Quick install and start
-### Install
+## Table of Contents
+
+- [Quick install and start](#started)
+  - [Install](#Install)
+  - [Dependencies](#Dependencies)
+  - [Running pipeline with snakemake](#pipe)
+  - [Output files](#Output)
+- [Run step by step](#step)
+  - [00_Contig screen](#00_Contig)
+  - [01_Contig scaffolding](#01_Contig)
+  - [02_Gap patching](#02_Gap)
+  - [03_Polishing](#03_Polishing)
+  - [04_Evaluation](#04_Evaluation)
+
+## <a name="started"></a>Quick install and start
+### <a name="Install"></a>Install
 git clone https://github.com/liushoucheng/SPART.git
 
 cd SPART
@@ -12,7 +26,7 @@ conda env create -f SPART.yaml
 
 conda activate spart
 
-### Dependencies
+### <a name="Dependencies"></a>Dependencies
 
 List of tools assumed loadable or accessible with no path are:
 
@@ -36,7 +50,7 @@ List of tools assumed loadable or accessible with no path are:
 
 * [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
-### Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
+### <a name="pipe"></a>Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
 
 sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml
 
@@ -57,12 +71,12 @@ cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'f
 <img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">
 </div>
 
-#### Output files
+### <a name="Output"></a>Output files
 please see the complete [documentation]( https://github.com/liushoucheng/SPART/tree/main/exmple).
 
-## Run step by step:
+## <a name="step"></a>Run step by step
 
-### 00_Contig screen
+### <a name="00_Contig"></a>00_Contig screen
 #### Fastp :was used to filter adapter sequences, primers and other low quality sequence from raw sequencing reads.
 SPART/00_Contig_screen/fastp.sh $HiFi_reads $ONT_reads
 #### Hifiasm
@@ -73,14 +87,14 @@ SPART/00_Contig_screen/verkko.sh $output_prefix $HiFi_reads $ONT_reads $threads 
 SPART/00_Contig_screen/flye.sh $ONT_reads $output_prefix $threads
 #### Remove MT & CP
 SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
-### 01_Contig scaffolding
+### <a name="01_Contig"></a>01_Contig scaffolding
 #### Bionano
 SPART/01_Contig_scaffolding/Bionano_DLS_map.sh threads bnx ref_cmap prefix xml Bio_dir cluster_xml ref bio_camp merge_xml RefAligner
 #### Hi-C
 SPART/01_Contig_scaffolding/HiC-Pro.sh ref ref_prefix hicpro_data hicpro_config hicpro_outdir
 
 SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
-### 02_Gap patching
+### <a name="02_Gap"></a>02_Gap patching
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
 
 #### Manual operation
@@ -117,9 +131,9 @@ https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
 
 SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1 CHIP2 threads
 
-### 03_Polishing
+### <a name="03_Polishing"></a>03_Polishing
 SPART/03_Polishing/calsv_snv.sh workdir ref threads
-### 04_Evaluation
+### <a name="04_Evaluation"></a>04_Evaluation
 #### BUSCO
 SPART/04_Evaluation/BUSCO.sh ref prefix
 #### mapping rates & coverages
