@@ -67,7 +67,7 @@ sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png
 
 # configfile:The config file can be used to define a dictionary of configuration parameters and their values.
-```sh
+```
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 <div align=center>
 <img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">
