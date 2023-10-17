@@ -130,7 +130,7 @@ Finally, the polished result was patched into the assembly with ragtag patch or 
 https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
 #### Centromeric region analysis
 
-SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1 CHIP2 threads
+SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1_treatment CHIP2_treatment threads CHIP1_control CHIP2_control
 
 ### <a name="03_Polishing"></a>03_Polishing
 SPART/03_Polishing/calsv_snv.sh workdir ref threads
