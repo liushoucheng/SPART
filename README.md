@@ -19,6 +19,7 @@ See [tutorial]( https://spart1.readthedocs.io/en/latest/) for more details.
 
 ## <a name="started"></a>Quick install and start
 ### <a name="Install"></a>Install
+```sh
 git clone https://github.com/liushoucheng/SPART.git
 
 cd SPART
@@ -26,7 +27,7 @@ cd SPART
 conda env create -f SPART.yaml
 
 conda activate spart
-
+```
 ### <a name="Dependencies"></a>Dependencies
 
 List of tools assumed loadable or accessible with no path are:
@@ -52,7 +53,7 @@ List of tools assumed loadable or accessible with no path are:
 * [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
 ### <a name="pipe"></a>Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
-
+```sh
 sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml
 
 HiC_enzyme=" GATC"
@@ -65,8 +66,8 @@ sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml
 
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png
 
-configfile:The config file can be used to define a dictionary of configuration parameters and their values.
-
+# configfile:The config file can be used to define a dictionary of configuration parameters and their values.
+```sh
 cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 <div align=center>
 <img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">
