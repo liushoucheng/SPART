@@ -67,8 +67,9 @@ sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png
 
 # configfile:The config file can be used to define a dictionary of configuration parameters and their values.
+
+#cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ```
-cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 <div align=center>
 <img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">
 </div>
@@ -79,6 +80,7 @@ please see the complete [documentation]( https://github.com/liushoucheng/SPART/t
 ## <a name="step"></a>Run step by step
 
 ### <a name="00_Contig"></a>00_Contig screen
+```sh
 #### Fastp :was used to filter adapter sequences, primers and other low quality sequence from raw sequencing reads.
 SPART/00_Contig_screen/fastp.sh $HiFi_reads $ONT_reads
 #### Hifiasm
@@ -89,14 +91,18 @@ SPART/00_Contig_screen/verkko.sh $output_prefix $HiFi_reads $ONT_reads $threads 
 SPART/00_Contig_screen/flye.sh $ONT_reads $output_prefix $threads
 #### Remove MT & CP
 SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
+```
 ### <a name="01_Contig"></a>01_Contig scaffolding
+```sh
 #### Bionano
 SPART/01_Contig_scaffolding/Bionano_DLS_map.sh threads bnx ref_cmap prefix xml Bio_dir cluster_xml ref bio_camp merge_xml RefAligner
 #### Hi-C
 SPART/01_Contig_scaffolding/HiC-Pro.sh ref ref_prefix hicpro_data hicpro_config hicpro_outdir
 
 SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
+```
 ### <a name="02_Gap"></a>02_Gap patching
+```sh
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
 
 #### Manual operation
@@ -132,10 +138,13 @@ https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
 #### Centromeric region analysis
 
 SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1_treatment CHIP2_treatment threads CHIP1_control CHIP2_control
-
+```
 ### <a name="03_Polishing"></a>03_Polishing
+```sh
 SPART/03_Polishing/calsv_snv.sh workdir ref threads
+```
 ### <a name="04_Evaluation"></a>04_Evaluation
+```sh
 #### BUSCO
 SPART/04_Evaluation/BUSCO.sh ref prefix
 #### mapping rates & coverages
@@ -150,3 +159,4 @@ SPART/04_Evaluation/bac.sh bac_reads ref_chr
 SPART/04_Evaluation/while.sh threads partition ref query
 ### Analysis of synteny
 SPART/04_Evaluation/synteny.sh protein name gff3
+```
