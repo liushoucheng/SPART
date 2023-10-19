@@ -21,11 +21,8 @@ See [tutorial]( https://spart1.readthedocs.io/en/latest/) for more details.
 ### <a name="Install"></a>Install
 ```sh
 git clone https://github.com/liushoucheng/SPART.git
-
 cd SPART
-
 conda env create -f SPART.yaml
-
 conda activate spart
 ```
 ### <a name="Dependencies"></a>Dependencies
@@ -54,20 +51,13 @@ List of tools assumed loadable or accessible with no path are:
 
 ### <a name="pipe"></a>Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
 ```sh
-sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml
-
-HiC_enzyme=" GATC"
-
-sed -i "s#^ hic_sca_enzyme# ${HiC_enzyme}#g" conf_ck.yaml
-
-HiC_ligation_site=" GATCGATC"
-
-sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml
-
-snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png
-
+sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml #Replace SPART_PATH with the current working directory
+HiC_enzyme=" GATC" #HiC enzyme
+sed -i "s#^ hic_sca_enzyme# ${HiC_enzyme}#g" conf_ck.yaml #Replace hic_sca_enzyme with the value stored in the HiC_enzyme variable
+HiC_ligation_site=" GATCGATC" #Ligation site sequence used for reads trimming. Depends on the fill in strategy. Example: AAGCTAGCTT
+sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml #Replace hic_sca_ligation_site with the value stored in the HiC_ligation_site variable
+snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png #Running pipeline with snakemake
 # configfile:The config file can be used to define a dictionary of configuration parameters and their values.
-
 #cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ```
 <div align=center>
