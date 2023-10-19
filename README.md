@@ -92,7 +92,7 @@ SPART/01_Contig_scaffolding/yahs.sh $enzyme $ref $bed/bam/bin $profix #yahs
 ```
 ### <a name="02_Gap"></a>02_Gap patching
 ```sh
-SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
+SPART/02_Gap_patching/wfmash_ragtag.sh $prefix $ref $region
 ```
 #### Manual operation
 ```sh
@@ -124,26 +124,26 @@ Finally, the polished result was patched into the assembly with ragtag patch or 
 https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
 #### Centromeric region analysis
 ```sh
-SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1_treatment CHIP2_treatment threads CHIP1_control CHIP2_control
+SPART/02_Gap_patching/Centromeric_region_analysis.sh $workdir $FASTA $INDEX $prefix $CHIP1_treatment $CHIP2_treatment $threads $CHIP1_control $CHIP2_control
 ```
 ### <a name="03_Polishing"></a>03_Polishing
 ```sh
-SPART/03_Polishing/calsv_snv.sh workdir ref threads
+SPART/03_Polishing/calsv_snv.sh $workdir $ref $threads
 ```
 ### <a name="04_Evaluation"></a>04_Evaluation
 ```sh
 #### BUSCO
-SPART/04_Evaluation/BUSCO.sh ref prefix
+SPART/04_Evaluation/BUSCO.sh $ref $prefix
 #### mapping rates & coverages
 SPART/04_Evaluation/mapping_rates_coverages.sh hybrid_bam single_bam ont_bam
 #### LTR
-SPART/04_Evaluation/ltr.sh ref prefix
+SPART/04_Evaluation/ltr.sh $ref $prefix
 #### QV
-SPART/04_Evaluation/qv.sh query ref
+SPART/04_Evaluation/qv.sh $query $ref
 #### BACs
-SPART/04_Evaluation/bac.sh bac_reads ref_chr
+SPART/04_Evaluation/bac.sh $bac_reads $ref_chr
 ### Addition
-SPART/04_Evaluation/while.sh threads partition ref query
+SPART/04_Evaluation/while.sh $threads $partition $ref $query
 ### Analysis of synteny
-SPART/04_Evaluation/synteny.sh protein name gff3
+SPART/04_Evaluation/synteny.sh $protein $name $gff3
 ```
