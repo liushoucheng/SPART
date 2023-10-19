@@ -57,7 +57,7 @@ sed -i "s#^ hic_sca_enzyme# ${HiC_enzyme}#g" conf_ck.yaml #Replace hic_sca_enzym
 HiC_ligation_site=" GATCGATC" #Ligation site sequence used for reads trimming. Depends on the fill in strategy. Example: AAGCTAGCTT
 sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml #Replace hic_sca_ligation_site with the value stored in the HiC_ligation_site variable
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png #Running pipeline with snakemake
-# configfile:The config file can be used to define a dictionary of configuration parameters and their values.
+#configfile:The config file can be used to define a dictionary of configuration parameters and their values.
 #cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ```
 <div align=center>
@@ -79,54 +79,51 @@ SPART/00_Contig_screen/hifiasm.sh $HiFi_reads $ONT_reads $output_prefix
 SPART/00_Contig_screen/verkko.sh $output_prefix $HiFi_reads $ONT_reads $threads $memory
 #### Flye
 SPART/00_Contig_screen/flye.sh $ONT_reads $output_prefix $threads
-#### Remove MT & CP
+#### Remove mitochondrion && chloroplast
 SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
 ```
 ### <a name="01_Contig"></a>01_Contig scaffolding
 ```sh
 #### Bionano
-SPART/01_Contig_scaffolding/Bionano_DLS_map.sh threads bnx ref_cmap prefix xml Bio_dir cluster_xml ref bio_camp merge_xml RefAligner
+SPART/01_Contig_scaffolding/Bionano_DLS_map.sh $threads $bnx $ref_cmap $prefix $xml $Bio_dir $cluster_xml $ref $bio_camp $merge_xml $RefAligner
 #### Hi-C
-SPART/01_Contig_scaffolding/HiC-Pro.sh ref ref_prefix hicpro_data hicpro_config hicpro_outdir
-
-SPART/01_Contig_scaffolding/yahs.sh enzyme ref bed/bam/bin profix
+SPART/01_Contig_scaffolding/HiC-Pro.sh $ref $ref_prefix $hicpro_data $hicpro_config $hicpro_outdir #hic-pro
+SPART/01_Contig_scaffolding/yahs.sh $enzyme $ref $bed/bam/bin $profix #yahs
 ```
 ### <a name="02_Gap"></a>02_Gap patching
 ```sh
 SPART/02_Gap_patching/wfmash_ragtag.sh prefix ref region
-
+```
 #### Manual operation
-
+```sh
 cd ragtag_output
-
 perl SPART/02_Gap_patching/paf_filter.pl -i ragtag.patch.debug.filtered.paf -minlen 10000000 -iden 0.5
-
+```
 **Manually editing the ragtag.patch.debug.filtered.paf file.Keep the high-quality contig and preserve the location of the only high confidence match in ragtag.patch.debug.filtered.paf that matches the sequence at both ends of the gap.**
-
+```sh
 perl SPART/02_Gap_patching/renameagp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch.debug.filtered.paf -start seq00000000 -end seq00000001 -o test.agp
-
+```
 **Test.agp is merged into ragtag.patch.agp and fasta is generated.**
 
 #### telomere patching
 We used _submit_telomere.sh in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on minimap2 alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka:
-
+```sh
 medaka -v -i ONT_tel_reads.fasta -d longest_ont_tel.fasta -o ont_tel_medaka.fasta
-
+```
 Telomere signal in all HiFi reads was identified with the commands:
-
+```sh
 _submit_telomere.sh hifi_reads.fasta
-
+```
 Additional HiFi reads were recruited from a manual analysis. We looked for trimmed tips that could extend. All reads had telomere signal and were aligned to the medaka consensus and polished with Racon with the commands:
-
+```sh
 minimap2 -t16 -ax map-pb ont_tel_medaka.fasta hifi_tel.fasta > medaka.sam
-
 racon hifi_tel.fasta medaka.sam ont_tel_medaka.fasta > racon.fasta
-
+```
 Finally, the polished result was patched into the assembly with ragtag patch or manually patched.
 ##### Citation
 https://github.com/marbl/CHM13-issues/blob/main/error_detection.md.
 #### Centromeric region analysis
-
+```sh
 SPART/02_Gap_patching/Centromeric_region_analysis.sh workdir FASTA INDEX prefix CHIP1_treatment CHIP2_treatment threads CHIP1_control CHIP2_control
 ```
 ### <a name="03_Polishing"></a>03_Polishing
