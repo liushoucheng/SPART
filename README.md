@@ -50,7 +50,8 @@ List of tools assumed loadable or accessible with no path are:
 * [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
 ### <a name="pipe"></a>Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
-* [Download the example in example/]( https://gofile.me/77wE8/Vj6Vlp1LK)
+* [Download the example in SPART/example/]( https://gofile.me/77wE8/Vj6Vlp1LK)
+* [Download the example in SPART/]( https://github.com/nservant/HiC-Pro/blob/master/bin/utils/digest_genome.py)
 ```sh
 sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml #Replace SPART_PATH with the current working directory
 HiC_enzyme=" GATC" #HiC enzyme
