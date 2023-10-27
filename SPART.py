@@ -90,14 +90,15 @@ rule rm_mt_cp:
     output:
         W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
     params:
-        W+"hifiasm_hybrid"
+        dir=W+"hifiasm_hybrid",
+        workdir=SPART_dir
     shell:
         """
-        cd {params}
+        cd {params.dir}
         minimap2 -t 96 -x asm5 {input.mt} {input.hybrid}> mitochondrion.paf
         minimap2 -t 96 -x asm5 {input.cp} {input.hybrid}> chloroplast.paf
-        python gemma_los.py mitochondrion.paf > mitochondrion.txt
-        python gemma_los.py chloroplast.paf > chloroplast.txt
+        python {params.workdir}gemma_los.py mitochondrion.paf > mitochondrion.txt
+        python {params.workdir}gemma_los.py chloroplast.paf > chloroplast.txt
         seqkit grep -v -f chloroplast.txt {input.hybrid} > wheat_remove_cp.fa
         seqkit grep -v -f mitochondrion.txt wheat_remove_cp.fa > {output}
         """
