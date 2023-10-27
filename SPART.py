@@ -122,7 +122,7 @@ rule hicpro:
         bowtie2-build --large-index --threads 96 {params.prefix}.fa {params.prefix}
         samtools faidx {params.prefix}.fa
         awk '{{print $1 "\t" $2}}' {params.prefix}.fa.fai > genome_sizes.bed
-        python ./HiC-Pro/bin/utils/digest_genome.py -r ^{params.enzyme} -o enzyme.bed {params.prefix}.fa
+        python {params.spart_dir}/digest_genome.py -r ^{params.enzyme} -o enzyme.bed {params.prefix}.fa
         makeblastdb -in {params.prefix}.fa -dbtype nucl -parse_seqids -out {params.prefix}
         cp {params.spart_dir}/01_Contig_scaffolding/hicpro_config.txt ./
         sed -i 's#^N_CPU = #N_CPU = 96#g' hicpro_config.txt
