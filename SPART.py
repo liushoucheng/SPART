@@ -130,7 +130,6 @@ rule hicpro:
         sed -i 's#^REFERENCE_GENOME = #REFERENCE_GENOME = {params.prefix}#g' hicpro_config.txt
         sed -i 's#^GENOME_SIZE = #GENOME_SIZE = {params.dir}/genome_sizes.bed#g' hicpro_config.txt
         sed -i 's#^GENOME_FRAGMENT = #GENOME_FRAGMENT = {params.dir}/enzyme.bed#g' hicpro_config.txt
-        sed -i 's#^GENOME_FRAGMENT = #GENOME_FRAGMENT = {params.dir}/enzyme.bed#g' hicpro_config.txt
         HiC-Pro -i {input.hic} -c hicpro_config.txt -o {params.dir}
         cd bowtie_results/bwt2
         for item in dir {params.dir}/bowtie_results/bwt2/*/*.bwt2pairs.bam; do samtools sort -m 1500M -n -@ 96 $item > $item.bam; done
