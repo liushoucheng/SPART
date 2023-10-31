@@ -51,7 +51,7 @@ List of tools assumed loadable or accessible with no path are:
 
 ### <a name="pipe"></a>Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
 * [Download the example in SPART/example/]( https://gofile.me/77wE8/Vj6Vlp1LK)
-* [Download the example in SPART/]( https://github.com/nservant/HiC-Pro/blob/master/bin/utils/digest_genome.py)
+* [Download the digest_genome.py of HiC-Pro in SPART/]( https://github.com/nservant/HiC-Pro/blob/master/bin/utils/digest_genome.py)
 ```sh
 sed -i "s#^ SPART_PATH# ${PWD}#g" conf_ck.yaml #Replace SPART_PATH with the current working directory
 HiC_enzyme=" GATC" #HiC enzyme

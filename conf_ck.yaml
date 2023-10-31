@@ -1,7 +1,7 @@
 HiFi_reads_merge:
- /home/lixp/software/SPART/example/hifi/HiFi.fastq
+ /home/lixp/software/SPART/example/HiFi.fastq
 ONT_reads_merge:
- /home/lixp/software/SPART/example/ont/ONT.fastq
+ /home/lixp/software/SPART/example/ONT.fastq
 mitochondrion:
  /home/lixp/software/SPART/example/mt/mitochondrion.fasta
 chloroplast:
