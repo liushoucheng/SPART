@@ -108,7 +108,7 @@ rule hicpro:
         hic=hic_hybrid_dir,
         ref=W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
     output:
-        W+"hic_hybrid/hic_hybrid.bam"
+        W+"hic_hybrid/result/bowtie_results/bwt2/sample/hic_hybrid.bam"
     params:
         dir=W+"hic_hybrid",
         prefix="hybrid.remove_cp_mt",
@@ -132,8 +132,7 @@ rule hicpro:
         sed -i 's#^GENOME_FRAGMENT = #GENOME_FRAGMENT = {params.dir}/enzyme.bed#g' hicpro_config.txt
         HiC-Pro -i {input.hic} -c hicpro_config.txt -o {params.dir}/result
         cd result/bowtie_results/bwt2/sample
-        for item in dir {params.dir}/bowtie_results/bwt2/*/*.bwt2pairs.bam; do samtools sort -m 1500M -n -@ 96 $item > $item.bam; done
-        samtools merge -@ 96 -o {output} {params.dir}/bowtie_results/bwt2/*/*.bwt2pairs.bam.bam
+        samtools sort -m 1500M -n -@ 96 HiC_hybrid.remove_cp_mt.bwt2pairs.bam > hic_hybrid.bam
         """
 
 rule yahs:
