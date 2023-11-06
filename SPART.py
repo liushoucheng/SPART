@@ -137,7 +137,7 @@ rule hicpro:
 
 rule yahs:
     input:
-        bam=W+"hic_hybrid/hic_hybrid.bam",
+        bam=W+"hic_hybrid/result/bowtie_results/bwt2/sample/hic_hybrid.bam",
         ref=W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
     output:
         W + "yahs_hybrid/yahs_hybrid.fa"
