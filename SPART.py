@@ -108,7 +108,7 @@ rule hicpro:
         hic=hic_hybrid_dir,
         ref=W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
     output:
-        W+"hic_hybrid/result/bowtie_results/bwt2/sample/hic_hybrid.bam"
+        W+"hic_hybrid/hic_hybrid.bam"
     params:
         dir=W+"hic_hybrid",
         prefix="hybrid.remove_cp_mt",
@@ -125,19 +125,19 @@ rule hicpro:
         python {params.spart_dir}/digest_genome.py -r ^{params.enzyme} -o enzyme.bed {params.prefix}.fa
         makeblastdb -in {params.prefix}.fa -dbtype nucl -parse_seqids -out {params.prefix}
         cp {params.spart_dir}/01_Contig_scaffolding/hicpro_config.txt ./
-        sed -i 's#^N_CPU = #N_CPU = 96#g' hicpro_config.txt
+        sed -i 's#^N_CPU = #N_CPU = 128#g' hicpro_config.txt
         sed -i 's#^BOWTIE2_IDX_PATH = #BOWTIE2_IDX_PATH = {params.dir}#g' hicpro_config.txt
         sed -i 's#^REFERENCE_GENOME = #REFERENCE_GENOME = {params.prefix}#g' hicpro_config.txt
         sed -i 's#^GENOME_SIZE = #GENOME_SIZE = {params.dir}/genome_sizes.bed#g' hicpro_config.txt
         sed -i 's#^GENOME_FRAGMENT = #GENOME_FRAGMENT = {params.dir}/enzyme.bed#g' hicpro_config.txt
         HiC-Pro -i {input.hic} -c hicpro_config.txt -o {params.dir}/result
         cd result/bowtie_results/bwt2/sample
-        samtools sort -m 1500M -n -@ 96 HiC_hybrid.remove_cp_mt.bwt2pairs.bam > hic_hybrid.bam
+        samtools sort -m 1500M -n -@ 96 HiC_hybrid.remove_cp_mt.bwt2pairs.bam > {params.dir}/hic_hybrid.bam
         """
 
 rule yahs:
     input:
-        bam=W+"hic_hybrid/result/bowtie_results/bwt2/sample/hic_hybrid.bam",
+        bam=W+"hic_hybrid/hic_hybrid.bam",
         ref=W+"hifiasm_hybrid/hybrid.remove_cp_mt.fa"
     output:
         W + "yahs_hybrid/yahs_hybrid.fa"
@@ -147,9 +147,11 @@ rule yahs:
         enzyme = hic_hybrid_enzyme
     shell:
         """
+	samtools index {input.bam}
+	samtools faidx {input.ref}
         cd {params.dir}
         yahs -e {params.enzyme} {input.ref} {input.bam} -o {params.prefix}
-        cp {params.dir}/yahs_bam_scaffolds_final.fa ./yahs_hybrid.fa
+        cp {params.dir}/yahs_bam_scaffolds_final.fa {output}
         """
 
 rule patch_flye:
