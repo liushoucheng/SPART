@@ -147,11 +147,12 @@ rule yahs:
         enzyme = hic_hybrid_enzyme
     shell:
         """
-	samtools index {input.bam}
-	samtools faidx {input.ref}
         cd {params.dir}
-        yahs -e {params.enzyme} {input.ref} {input.bam} -o {params.prefix}
-        cp {params.dir}/yahs_bam_scaffolds_final.fa {output}
+	samtools faidx {input.ref}
+	samtools sort -@ 128 -o hic_hybrid_sort.bam {input.bam}
+	samtools index hic_hybrid_sort.bam
+        yahs -e {params.enzyme} {input.ref} hic_hybrid_sort.bam -o {params.prefix}
+        cp {params.dir}/{params.prefix}_scaffolds_final.fa {output}
         """
 
 rule patch_flye:
@@ -162,10 +163,12 @@ rule patch_flye:
         W + "patch_flye/patch_single_hybrid_flye.fa"
     params:
         dir = W + "patch_flye",
-        prefix = "single_hybrid_flye",
+        prefix = "single_hybrid_flye"
     shell:
         """
         cd {params.dir}
+        samtools faidx {input.single_hybrid}
+        samtools faidx {input.flye}
         wfmash {input.single_hybrid} {input.flye} > {params.prefix}.paf 
         mkdir ragtag_output
         cd ragtag_output
@@ -188,6 +191,8 @@ rule patch_verkko:
     shell:
         """
         cd {params.dir}
+        samtools faidx {input.single_hybrid_flye}
+        samtools faidx {input.verkko}
         wfmash {input.single_hybrid_flye} {input.verkko} > {params.prefix}.paf 
         mkdir ragtag_output
         cd ragtag_output
