@@ -200,7 +200,7 @@ rule patch_verkko:
         cd ..
         ragtag.py patch -f 10000 --remove-small {input.single_hybrid_flye} {input.verkko}
         cp {params.dir}/ragtag_output/ragtag.patch.fasta {output.ref}
-        bwa-mem2.avx512bw index {output.ref}
+        bwa-mem2 index {output.ref}
         meryl count k=27 output merylDB {output.ref}
         meryl print greater-than distinct=0.9998 merylDB > {output.txt}
         """
