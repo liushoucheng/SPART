@@ -58,6 +58,7 @@ HiC_enzyme=" GATC" #HiC enzyme
 sed -i "s#^ hic_sca_enzyme# ${HiC_enzyme}#g" conf_ck.yaml #Replace hic_sca_enzyme with the value stored in the HiC_enzyme variable
 HiC_ligation_site=" GATCGATC" #Ligation site sequence used for reads trimming. Depends on the fill in strategy. Example: AAGCTAGCTT
 sed -i "s#^ hic_sca_ligation_site# ${HiC_ligation_site}#g" conf_ck.yaml #Replace hic_sca_ligation_site with the value stored in the HiC_ligation_site variable
+#This process uses the centos 7.6 operating system, slurm job scheduling system, please modify your SPART/clust.json according to the cluster situation.
 snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cluster '{cluster.account}' --jobs $threads --rerun-incomplete --restart-times 1 -np --rulegraph |dot -Tpng > rule.png #Running pipeline with snakemake
 #configfile:The config file can be used to define a dictionary of configuration parameters and their values.
 #cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
