@@ -94,21 +94,21 @@ SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref $threads
 ```
 ### <a name="01_Contig"></a>01_Contig scaffolding
 ```sh
-threads=Nominal threads per Node, without overloading (non-zero value will override -T -Tp -Te -TJ)
-bnx=Input molecule (.bnx) file, required
-ref_cmap=Reference file (must be .cmap), to compare resulting contigs
-prefix=Location of output files root directory, required, will be created if does not exist; if does exist, will overwrite contents
-xml=Read XML file for parameters
-Bio_dir=Location of executable files (RefAligner and Assembler, required)
-cluster_xml=Run on cluster, read XML file for submission arguments (optional--will not use cluster submission if absent)
-ref=Input NGS FASTA
-bio_camp=Input BioNano CMAP
-merge_xml=Merge configuration file
-RefAligner=RefAligner program
-hicpro_data=input data folder; Must contains a folder per sample with input files
-hicpro_config=configuration file for Hi-C processing
-hicpro_outdir=output folder
-enzyme=restriction enzyme cutting sites
+threads=#Nominal threads per Node, without overloading (non-zero value will override -T -Tp -Te -TJ)
+bnx=#Input molecule (.bnx) file, required
+ref_cmap=#Reference file (must be .cmap), to compare resulting contigs
+prefix=#Location of output files root directory, required, will be created if does not exist; if does exist, will overwrite contents
+xml=#Read XML file for parameters
+Bio_dir=#Location of executable files (RefAligner and Assembler, required)
+cluster_xml=#Run on cluster, read XML file for submission arguments (optional--will not use cluster submission if absent)
+ref=#Input NGS FASTA
+bio_camp=#Input BioNano CMAP
+merge_xml=#Merge configuration file
+RefAligner=#RefAligner program
+hicpro_data=#input data folder; Must contains a folder per sample with input files
+hicpro_config=#configuration file for Hi-C processing
+hicpro_outdir=#output folder
+enzyme=#restriction enzyme cutting sites
 #### Bionano
 SPART/01_Contig_scaffolding/Bionano_DLS_map.sh $threads $bnx $ref_cmap $prefix $xml $Bio_dir $cluster_xml $ref $bio_camp $merge_xml $RefAligner
 #### Hi-C
