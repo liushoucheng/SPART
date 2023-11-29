@@ -119,7 +119,10 @@ SPART/01_Contig_scaffolding/yahs.sh $enzyme $ref $bed/bam/bin $profix #yahs
 ```
 ### <a name="02_Gap"></a>02_Gap patching
 ```sh
-SPART/02_Gap_patching/wfmash_ragtag.sh $prefix $ref $region
+query=#query fasta file (uncompressed or bgzipped)
+ref=#target fasta file (uncompressed or bgzipped)
+region=#output directory
+SPART/02_Gap_patching/wfmash_ragtag.sh $query $ref $region
 ```
 #### Manual operation
 ```sh
