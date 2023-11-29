@@ -201,10 +201,24 @@ SPART/02_Gap_patching/Centromeric_region_analysis.sh $workdir $FASTA $prefix $CH
 ```
 ### <a name="03_Polishing"></a>03_Polishing
 ```sh
+# Use singularity and docker to download google_deepvariant_latest-gpu.sif and kishwars/pepper_deepvariant:r0.8-gpu respectively and modify the cluster-config and configfile in snakemake
+workdir=# work directory
+ref=# target fasta file (uncompressed or bgzipped)
+threads=# number of threads
 SPART/03_Polishing/calsv_snv.sh $workdir $ref $threads
 ```
 ### <a name="04_Evaluation"></a>04_Evaluation
 ```sh
+ref=# target fasta file (uncompressed or bgzipped)
+prefix=# prefix of output files
+query=# query fasta file (uncompressed or bgzipped)
+threads=# number of threads
+partition=# your cluster partition
+bac_reads=# bac reads
+ref_chr=# target chromosome fasta file (uncompressed or bgzipped)
+protein=# target protein fasta file
+name=# output file name
+gff3# target gff file
 #### BUSCO
 SPART/04_Evaluation/BUSCO.sh $ref $prefix
 #### mapping rates & coverages
