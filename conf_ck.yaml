@@ -1,30 +1,30 @@
 HiFi_reads_merge:
- /home/lixp/software/SPART/example/HiFi.fastq
+ SPART_PATH/example/hifi/HiFi.fastq
 ONT_reads_merge:
- /home/lixp/software/SPART/example/ONT.fastq
+ SPART_PATH/example/ont/ONT.fastq
 mitochondrion:
- /home/lixp/software/SPART/example/mt/mitochondrion.fasta
+ SPART_PATH/example/mt/mitochondrion.fasta
 chloroplast:
- /home/lixp/software/SPART/example/cp/chloroplast.fasta
+ SPART_PATH/example/cp/chloroplast.fasta
 hic_dir:
- /home/lixp/software/SPART/example/hic
+ SPART_PATH/example/hic
 SPART_dir:
- /home/lixp/software/SPART
+ SPART_PATH
 hic_enzyme:
-  GATC
+ GATC
 hic_enzyme_ligation_site:
- hic_sca_ligation_site
+ GATCGATC
 verkko_assemble:
- /home/lixp/software/SPART/example/verkko/verkko.fasta
+ SPART_PATH/example/verkko/verkko.fasta
 pcrfree_r1:
- /home/lixp/software/SPART/example/pcr/PCRFREE_1.fq
+ SPART_PATH/example/pcr/PCRFREE_1.fq
 pcrfree_r2:
- /home/lixp/software/SPART/example/pcr/PCRFREE_2.fq
+ SPART_PATH/example/pcr/PCRFREE_2.fq
 google_deepvariant_latest-gpu_sif:
  google_deepvariant_latest_gpu_sif
 DIR:
- /home/lixp/software/SPART/example/hifi
+ SPART_PATH/example/hifi
 DIRont:
- /home/lixp/software/SPART/example/ont
+ SPART_PATH/example/ont
 WORKDIR:
- /home/lixp/software/SPART/example/test/
+ SPART_PATH/example/test/
