@@ -10,6 +10,6 @@ for num in {1..7}
 do
 for chr in A B D
 do
-	sbatch --job-name="$num""$chr" --partition=cuPartition --cpus-per-task="$threads" winnowmap.sh "$num""$chr" $ref $query
+	sbatch --job-name="$num""$chr" --partition=$Partition --cpus-per-task="$threads" winnowmap.sh "$num""$chr" $ref $query
 done
 done
