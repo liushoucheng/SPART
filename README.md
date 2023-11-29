@@ -135,6 +135,35 @@ perl SPART/02_Gap_patching/renameagp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch
 ```
 **Test.agp is merged into ragtag.patch.agp and fasta is generated.**
 
+e.g.
+```sh
+# make joins and fill gaps in target.fa using sequences from query.fa
+cd SPART/example
+ragtag.py patch -i 0.99 --remove-small -q 10 --debug -u --aligner minimap2 -t 128 --mm2-params "-x asm20 -I1G -t 128" reference1A.fasta query1A.fasta
+# filter
+cd ragtag_output
+perl SPART/02_Gap_patching/paf_filter.pl -i ragtag.patch.debug.filtered.paf -minlen 10000000 -iden 0.5
+# Manually editing the ragtag.patch.debug.filtered.paf_fiter.paf file.Keep the high-quality contig and preserve the location of the only high confidence match in ragtag.patch.debug.filtered.paf_fiter.paf that matches the sequence at both ends of the gap.
+less ragtag.patch.debug.filtered.paf_fiter.paf
+qseq00000000    600453479       27150   3999147 +       seq00000001     3972000 4       3971997 2266668 3972018 60
+qseq00000000    600453479       4038251 35116708        +       seq00000002     597339226       17      31075089        17568679        31079144        60
+# gain agp
+perl /home/liusc/proj/wheat/code/agp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch.debug.filtered.paf_fiter.paf -start seq00000001 -end seq00000002 -o test.agp
+less -S ragtag.patch.agp
+chr1A_RagTag_MOD_MOD	1	2046621	1	W	seq00000000	1	2046621	+
+chr1A_RagTag_MOD_MOD	2046622	2046821	2	N	200	scaffold	yes	align_genus
+chr1A_RagTag_MOD_MOD	2046822	6018821	3	W	seq00000001	1	3972000	+
+chr1A_RagTag_MOD_MOD	6018822	6019021	4	N	200	scaffold	yes	align_genus
+chr1A_RagTag_MOD_MOD	6019022	603358247	5	W	seq00000002	1	597339226	+
+# Test.agp is merged into ragtag.patch.agp and fasta is generated.
+less -S ragtag.patch.agp
+scf00000000	1	2046621	1	W	seq00000000	1	2046621	+
+scf00000000	2046622	2046821	2	N	200	scaffold	yes	align_genus
+scf00000000	2046822	6018821	3	W	seq00000001	1	3972000	+
+scf00000000	6018822	6057905	4	W	qseq00000000	3999151	4038234	+
+scf00000000	6057906	603397131	5	W	seq00000002	1	597339226	+
+ragtag_agp2fa.py ragtag.patch.agp ragtag.patch.comps.fasta > ragtag.patch.fasta
+```
 #### telomere patching
 We used _submit_telomere.sh in ONT reads >100kb.ONT reads with telomere sequence mapping to this locus based on minimap2 alignments were manually identified. The longest was selected as template , all others aligned to it and polished with Medaka:
 ```sh
