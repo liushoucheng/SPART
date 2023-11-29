@@ -1,4 +1,4 @@
-name: spart
+name: Spart
 channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
@@ -69,6 +69,7 @@ dependencies:
   - dpath=2.1.6=pyha770c72_0
   - dropbox=11.36.1=py39h06a4308_0
   - entrez-direct=16.2=he881be0_1
+  - epic2=0.0.52=py39h9f35bd6_6
   - exceptiongroup=1.0.4=py39h06a4308_0
   - expat=2.5.0=hcb278e6_1
   - fastp=0.22.0=h2e03b76_0
@@ -189,6 +190,7 @@ dependencies:
   - multidict=6.0.2=py39h5eee18b_0
   - mummer=3.23=pl5321hdbdd923_16
   - mysql-connector-c=6.1.11=h24aacaa_2
+  - natsort=7.1.1=pyhd3eb1b0_0
   - nbformat=5.7.0=py39h06a4308_0
   - ncbi-vdb=3.0.0=pl5321h87f3376_0
   - ncurses=6.4=h6a678d5_0
@@ -352,6 +354,7 @@ dependencies:
   - rsa=4.7.2=pyhd3eb1b0_1
   - s3transfer=0.6.0=py39h06a4308_0
   - samtools=1.17=hd87286a_1
+  - scipy=1.11.3=py39heeff2f4_0
   - sed=4.8=h7b6447c_0
   - sepp=4.4.0=py39_0
   - setuptools=67.8.0=py39h06a4308_0
