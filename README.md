@@ -148,7 +148,7 @@ less ragtag.patch.debug.filtered.paf_fiter.paf
 qseq00000000    600453479       27150   3999147 +       seq00000001     3972000 4       3971997 2266668 3972018 60
 qseq00000000    600453479       4038251 35116708        +       seq00000002     597339226       17      31075089        17568679        31079144        60
 # gain agp
-perl /home/liusc/proj/wheat/code/agp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch.debug.filtered.paf_fiter.paf -start seq00000001 -end seq00000002 -o test.agp
+perl SPART/02_Gap_patching/renameagp.pl -i ragtag.patch.ctg.agp -i1 ragtag.patch.debug.filtered.paf_fiter.paf -start seq00000001 -end seq00000002 -o test.agp
 less -S ragtag.patch.agp
 chr1A_RagTag_MOD_MOD	1	2046621	1	W	seq00000000	1	2046621	+
 chr1A_RagTag_MOD_MOD	2046622	2046821	2	N	200	scaffold	yes	align_genus
