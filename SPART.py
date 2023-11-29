@@ -259,7 +259,7 @@ rule pcr_free:
     output:
         W+"hybrid_hifi_pcr/pcr.bam"
     shell:
-       "bwa-mem2.avx512bw mem -t 96 {input.fa} {input.r1} {input.r2}|samtools view -@ 96 -b -|samtools sort -@ 96 -m 30G -o {output} -"
+       "bwa-mem2 mem -t 96 {input.fa} {input.r1} {input.r2}|samtools view -@ 96 -b -|samtools sort -@ 96 -m 1G -o {output} -"
 
 rule winnowmap_hifi_filter_pcr_merge:
     input:
@@ -314,4 +314,4 @@ rule winnowmap_ont_sort_filter_merge:
     benchmark:
         W + "benchmarks/ont_merge/benchmark.txt"
     shell:
-        "samtools merge -@ 128 -o {output} {input}"
+        "samtools merge -@ 128 {output} {input}"
