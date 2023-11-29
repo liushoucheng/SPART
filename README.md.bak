@@ -90,7 +90,7 @@ SPART/00_Contig_screen/verkko.sh $output_prefix $HiFi_reads $ONT_reads $threads 
 #### Flye
 SPART/00_Contig_screen/flye.sh $ONT_reads $output_prefix $threads
 #### Remove mitochondrion && chloroplast
-SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref $threads
+SPART/00_Contig_screen/rm_mt_cp.sh $mitochondrion $chloroplast $ref
 ```
 ### <a name="01_Contig"></a>01_Contig scaffolding
 ```sh

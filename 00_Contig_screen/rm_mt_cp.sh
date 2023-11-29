@@ -3,10 +3,10 @@
 mt=$1
 cp=$2
 ref=$3
+threads=$4
+minimap2 -t $threads -x asm5 $mt $ref> mitochondrion.paf
 
-minimap2 -t 52 -x asm5 $mt $ref> mitochondrion.paf
-
-minimap2 -t 52 -x asm5 $cp $ref> chloroplast.paf
+minimap2 -t $threads -x asm5 $cp $ref> chloroplast.paf
 
 python gemma_los.py mitochondrion.paf > mitochondrion.txt
 python gemma_los.py chloroplast.paf > chloroplast.txt
