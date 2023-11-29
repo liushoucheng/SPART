@@ -2,13 +2,12 @@
 
 workdir=$1
 FASTA=$2
-INDEX=$3
-prefix=$4
-CHIP1=$5
-CHIP2=$6
-threads=$7
-CHIP1c=$8
-CHIP2c=$9
+prefix=$3
+CHIP1=$4
+CHIP2=$5
+threads=$6
+CHIP1c=$7
+CHIP2c=$8
 
 #treatment
 SAM="${workdir}/ref_chip.sam"
