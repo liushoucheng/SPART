@@ -234,3 +234,8 @@ SPART/04_Evaluation/while.sh $threads $partition $ref $query
 ### Analysis of synteny
 SPART/04_Evaluation/synteny.sh $protein $name $gff3
 ```
+# Contacts
+
+shoucheng Liu (liusc_work@163.com)
+
+xiaopeng Li (xiaopeng.li@pku-iaas.edu.cn)
