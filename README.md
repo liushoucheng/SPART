@@ -49,7 +49,7 @@ List of tools assumed loadable or accessible with no path are:
 
 * [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
-### <a name="pipe"></a>Running pipeline with snakemake(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
+### <a name="pipe"></a>Using snakemake to run the pipeline can be assembled to the chromosome level but may contain gaps that require the rest to be done manually.(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
 * [Download the example in SPART/example/]( https://gofile.me/77wE8/Vj6Vlp1LK)
 * [Download the digest_genome.py of HiC-Pro in SPART/]( https://github.com/nservant/HiC-Pro/blob/master/bin/utils/digest_genome.py)
 ```sh
@@ -69,7 +69,7 @@ snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cl
 # cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ```
 <div align=center>
-<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png">
+<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png" width="40%">
 </div>
 
 ### <a name="Output"></a>Output files
