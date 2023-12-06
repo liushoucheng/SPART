@@ -68,8 +68,8 @@ snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cl
 # configfile:The config file can be used to define a dictionary of configuration parameters and their values.
 # cluster-config:A JSON or YAML file that defines the wildcards used in 'cluster'for specific rules.
 ```
-
-<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png" width="10%">
+<div align=center>
+<img src="https://github.com/liushoucheng/SPART/blob/main/pic/rule.png" width="15%">
 </div>
 
 ### <a name="Output"></a>Output files
