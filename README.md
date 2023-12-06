@@ -1,6 +1,6 @@
 # SPART
 SPART, a Semi-automated pipeline for assembling reference sequence of telomere-to-telomere (T2T). 
-![image](https://github.com/liushoucheng/SPART/blob/main/pic/pipeline.jpg) width="30%"
+![image width="30%"](https://github.com/liushoucheng/SPART/blob/main/pic/pipeline.jpg)
 
 See [tutorial]( https://spart1.readthedocs.io/en/latest/) for more details. 
 ## Table of Contents
