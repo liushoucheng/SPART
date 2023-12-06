@@ -73,7 +73,7 @@ snakemake -s SPART.py --cluster-config clust.json --configfile conf_ck.yaml --cl
 </div>
 
 ### <a name="Output"></a>Output files
-please see the complete [documentation]( https://github.com/liushoucheng/SPART/tree/main/exmple).
+please see the complete [documentation](https://github.com/liushoucheng/SPART/tree/main/example).
 
 ## <a name="step"></a>Run step by step
 
