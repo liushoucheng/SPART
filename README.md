@@ -255,7 +255,14 @@ stringtie -j 2 -c 2 -m 150 -f 0.3 -G ${reference annotation} -l rna-seq -t -p ${
 stringtie --merge -p 96 -m 150 -c 10 -G ${reference annotation} -l rna_merge -o rna_all.gtf { gtf_list | strg1.gtf ...}
 ```
 #### ISO-seq
-
+Build genome index
+```sh
+minimap2 -t 96 -I 16G -d $mmi $genome
+```
+Mapping to genome
+```sh
+flair 123 --mm2_args=-I15g,-axsplice:hq,-uf,-secondary=no -g $genome -r $iso_seq --mm_index $mmi -f $gtf -o flair.output --temp_dir temp_flair --stringent --no_gtf_end_adjustment --check_splice --generate_map --trust_end -t 96 --annotation_reliant generate --junction_bed $stringtie.bed
+```
 # Contacts
 
 shoucheng Liu (liusc_work@163.com)
