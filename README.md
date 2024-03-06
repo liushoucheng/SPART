@@ -263,6 +263,13 @@ Align && Correct && Collapse
 ```sh
 flair 123 --mm2_args=-I15g,-axsplice:hq,-uf,-secondary=no -g $genome -r $iso_seq --mm_index $mmi -f $gtf -o flair.output --temp_dir temp_flair --stringent --no_gtf_end_adjustment --check_splice --generate_map --trust_end -t 96 --annotation_reliant generate --junction_bed $stringtie.bed
 ```
+#### Homology protein
+miniprot
+```sh
+miniprot -t96 -d CS-IAAS_v1.softmask.mpi CS-IAAS_v1.softmask.fasta
+miniprot -It96 --gff CS-IAAS_v1.softmask.mpi ${Homology protein} > miniprot.gff3
+python Genome-annotation-pipeline-main/scripts/miniprot.py miniprot.gff3 > protein_alignments.gff3
+```
 # Contacts
 
 Shoucheng Liu (liusc_work@163.com)
