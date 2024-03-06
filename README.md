@@ -265,6 +265,6 @@ flair 123 --mm2_args=-I15g,-axsplice:hq,-uf,-secondary=no -g $genome -r $iso_seq
 ```
 # Contacts
 
-shoucheng Liu (liusc_work@163.com)
+Shoucheng Liu (liusc_work@163.com)
 
-xiaopeng Li (xiaopeng.li@pku-iaas.edu.cn)
+Xiaopeng Li (xiaopeng.li@pku-iaas.edu.cn)
