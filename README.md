@@ -16,6 +16,7 @@ SPART, a Semi-automated pipeline for assembling reference sequence of telomere-t
   - [02_Gap patching](#02_Gap)
   - [03_Polishing](#03_Polishing)
   - [04_Evaluation](#04_Evaluation)
+  - [05_Annotation](#05_Annotation)
 
 ## <a name="started"></a>Quick install and start
 ### <a name="Install"></a>Install
@@ -234,6 +235,27 @@ SPART/04_Evaluation/while.sh $threads $partition $ref $query
 ### Analysis of synteny
 SPART/04_Evaluation/synteny.sh $protein $name $gff3
 ```
+### <a name="05_Annotation"></a>05_Annotation
+#### RNA-seq
+Detect adapter
+```sh
+fastp --detect_adapter_for_pe -w ${threads} -i ${RNAseq1} -I ${RNAseq2} -o ${RNAseq1_clean} -O ${RNAseq2_clean} --json ${output}.json --html ${output}.html
+```
+Build genome index
+```sh
+STAR --runThreadN ${threads} --runMode genomeGenerate --genomeDir ${Output Dir} --genomeFastaFiles ${genome} --sjdbGTFtagExonParentTranscript Parent --sjdbGTFfile ${annotations} --limitGenomeGenerateRAM 40000000000 --sjdbOverhang 149 --sjdbFileChrStartEnd ${genomic coordinates} --limitSjdbInsertNsj 1854820
+```
+Mapping to genome
+```sh
+STAR --runThreadN ${threads} --genomeDir ${Output Dir} --readFilesIn ${RNAseq1_clean} ${RNAseq2_clean} --sjdbGTFtagExonParentTranscript Parent --sjdbGTFfile ${annotations} --outFileNamePrefix "$profix" --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterType BySJout --outSAMunmapped Within --outFilterMultimapNmax 20 --outSAMstrandField intronMotif --outFilterMismatchNoverLmax 0.02 --outFilterMismatchNmax 999 --alignIntronMin 20 --alignIntronMax 10000 --alignMatesGapMax 100000 --sjdbScore 1 --genomeLoad NoSharedMemory --outSAMtype BAM SortedByCoordinate --limitSjdbInsertNsj 1854820
+```
+Assembly and merge
+```sh
+stringtie -j 2 -c 2 -m 150 -f 0.3 -G ${reference annotation} -l rna-seq -t -p ${threads} -l "$profix" -A "$profix"gene_abund.tab -C "$profix"cov_refs.gtf -o "$profix".gtf "$profix"Aligned.sortedByCoord.out.bam
+stringtie --merge -p 96 -m 150 -c 10 -G ${reference annotation} -l rna_merge -o rna_all.gtf { gtf_list | strg1.gtf ...}
+```
+#### ISO-seq
+
 # Contacts
 
 shoucheng Liu (liusc_work@163.com)
