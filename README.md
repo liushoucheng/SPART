@@ -270,6 +270,14 @@ miniprot -t96 -d CS-IAAS_v1.softmask.mpi CS-IAAS_v1.softmask.fasta
 miniprot -It96 --gff CS-IAAS_v1.softmask.mpi ${Homology protein} > miniprot.gff3
 python Genome-annotation-pipeline-main/scripts/miniprot.py miniprot.gff3 > protein_alignments.gff3
 ```
+#### Ab initio gene prediction
+Braker3
+```sh
+##### RNA-seq && Homology protein
+docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" teambraker/braker3:latest braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --addUTR=on --gff3 --nocleanup --bam=rna_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH=/home/liusc/software/miniconda3/envs/braker3/bin --AUGUSTUS_BIN_PATH=/home/apps/soft/micromamba/envs/maker/bin --AUGUSTUS_hints_preds=augustus.hints.gtf --skipAllTraining --JAVA_PATH=/home/liusc/software/miniconda3/bin
+##### ISO-seq && Homology protein
+docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" katharinahoff/playground:devel braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --gff3 --nocleanup --bam=iso_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH=/home/liusc/software/miniconda3/envs/braker3/bin --AUGUSTUS_BIN_PATH=/home/apps/soft/micromamba/envs/maker/bin
+```
 # Contacts
 
 Shoucheng Liu (liusc_work@163.com)
