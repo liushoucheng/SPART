@@ -274,9 +274,9 @@ python Genome-annotation-pipeline-main/scripts/miniprot.py miniprot.gff3 > prote
 Braker3
 ```sh
 ##### RNA-seq && Homology protein
-docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" teambraker/braker3:latest braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --addUTR=on --gff3 --nocleanup --bam=rna_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH=/home/liusc/software/miniconda3/envs/braker3/bin --AUGUSTUS_BIN_PATH=/home/apps/soft/micromamba/envs/maker/bin --AUGUSTUS_hints_preds=augustus.hints.gtf --skipAllTraining --JAVA_PATH=/home/liusc/software/miniconda3/bin
+docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" teambraker/braker3:latest braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --addUTR=on --gff3 --nocleanup --bam=rna_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH= --AUGUSTUS_BIN_PATH= --JAVA_PATH=
 ##### ISO-seq && Homology protein
-docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" katharinahoff/playground:devel braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --gff3 --nocleanup --bam=iso_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH=/home/liusc/software/miniconda3/envs/braker3/bin --AUGUSTUS_BIN_PATH=/home/apps/soft/micromamba/envs/maker/bin
+docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" katharinahoff/playground:devel braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --gff3 --nocleanup --bam=iso_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH= --AUGUSTUS_BIN_PATH=
 ```
 # Contacts
 
