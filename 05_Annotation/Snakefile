@@ -1,0 +1,167 @@
+# Created on May 09, 2017
+#
+# Version 1.0
+#
+# @author: sven.twardziok@posteo.de
+
+
+configfile: "config.yaml"
+
+import csv
+
+from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from modules import fasta
+import os
+import re
+import linecache
+
+#####################################################################################################################################
+reference="CS-IAAS_v1.softmask.fasta"
+flair_stringtie="flair.output.isoforms.gtf"
+rule final:
+    input:
+        "transcripts.genes.gff3"
+
+rule gtf_genome_to_cdna_fasta:
+    input:
+        gff=flair_stringtie,
+        genome=reference
+    output:
+        "transcripts.fasta"
+    threads: 128
+    run:
+        shell("gtf_genome_to_cdna_fasta.pl {input.gff} {input.genome} > {output}")
+rule gtf_to_alignment_gff3:
+    input:
+        flair_stringtie
+    output:
+        "transcripts.gff3"
+    threads: 128
+    run:
+        shell("gtf_to_alignment_gff3.pl {input} > {output}")
+rule transdecoder_longorfs:
+    input:
+        fasta="transcripts.fasta"
+    output:
+        pep="transcripts.fasta.transdecoder_dir/longest_orfs.pep"
+    params:
+        executable=config["executables"]["transdecoder"]["longorfs"]
+    threads: 128
+    run:
+        shell("{params.executable} -t {input.fasta}")
+
+rule transdecoder_splitfasta:
+    input:
+        fasta="transcripts.fasta.transdecoder_dir/longest_orfs.pep"
+    output:
+        fastas=temp(["transcripts.fasta.transdecoder_dir/batches/part_" + str(nbatch) + "/part_" + str(nbatch) + ".fasta"
+        for nbatch in range(1, config["transdecoder"]["nbatches"]+1)])
+    threads: 1
+    run:
+        splitfasta = fasta.SplitSeqs(sequences=input.fasta, outdir="transcripts.fasta.transdecoder_dir/batches" , nfiles=config["transdecoder"]["nbatches"])
+
+rule transdecoder_blast:
+    input:
+        fasta="transcripts.fasta.transdecoder_dir/batches/part_{nbatch}/part_{nbatch}.fasta"
+    output:
+        blp=temp("transcripts.fasta.transdecoder_dir/batches/part_{nbatch}/part_{nbatch}.blp")
+    params:
+        database = config["data"]["transdecoder"]["blastp"],
+        executable = config["executables"]["blastp"],
+    threads: 1
+    run:
+        shell(params.executable + " -max_target_seqs 1 -evalue 1e-05 -db {params.database} -query {input.fasta} -out {output.blp} -outfmt 6")
+
+rule transdecoder_blast_combine:
+    input:
+        blps=lambda wildcards: ["transcripts.fasta.transdecoder_dir/batches/part_" + str(nbatch) + "/part_" + str(nbatch) + ".blp"
+        for nbatch in range(1, config["transdecoder"]["nbatches"]+1)]
+    output:
+        blp="transcripts.fasta.transdecoder_dir/longest_orfs.pep_blastresults.blp"
+    threads: 1
+    run:
+        shell("touch {output.blp}")
+        for blp in input.blps:
+             shell("cat " + blp + " >> {output.blp}")
+
+rule transdecoder_hmmscan:
+    input:
+        fasta="transcripts.fasta.transdecoder_dir/batches/part_{nbatch}/part_{nbatch}.fasta"
+    output:
+        domtblout=temp("transcripts.fasta.transdecoder_dir/batches/part_{nbatch}/part_{nbatch}.domtblout")
+    params:
+        executable = config["executables"]["hmmscan"],
+        pfamhmm = config["data"]["transdecoder"]["pfamhmm"],
+        nodes = config["transdecoder"]["hmmscan"]["nodes"],
+        memory = config["transdecoder"]["hmmscan"]["memory"],
+        job_name = "hmmscanning",
+        log = config['transdecoder']['log']
+    resources:
+        MB = 2000,
+        load = 1
+    threads: 2
+    run:
+        shell(params.executable + "  --domtblout {output.domtblout} {params.pfamhmm} {input.fasta}")
+
+rule transdecoder_hmmscan_combine:
+    input:
+        domtblout=lambda wildcards: ["transcripts.fasta.transdecoder_dir/batches/part_" + str(nbatch) + "/part_" + str(nbatch) + ".domtblout"
+            for nbatch in range(1, config["transdecoder"]["nbatches"]+1)]
+    output:
+        domtblout="transcripts.fasta.transdecoder_dir/longest_orfs.pep_hmmscan.domtblout"
+    params:
+        nodes = 1,
+        memory = "4G",
+        job_name = config['transdecoder']['job_name'],
+        log = config['transdecoder']['log']
+    resources:
+        load = 1,
+        MB = 2000
+    threads: 1
+    run:
+        shell("touch {output.domtblout}")
+        for domtblout in input.domtblout:
+             shell("grep -v \"#\" " + domtblout + " >> {output.domtblout}")
+
+rule transdecoder_predict:
+    input:
+        fasta = "transcripts.fasta",
+        blp = "transcripts.fasta.transdecoder_dir/longest_orfs.pep_blastresults.blp",
+        domtblout = "transcripts.fasta.transdecoder_dir/longest_orfs.pep_hmmscan.domtblout"
+    output:
+        gff3 = "transcripts.fasta.transdecoder.gff3"
+    params:
+        executable=config["executables"]["transdecoder"]["predict"],
+        nodes = config["transdecoder"]["predict"]["nodes"],
+        memory = config["transdecoder"]["predict"]["memory"],
+        job_name = "predicting",
+        log = config['transdecoder']['log']
+    resources:
+        load = 1
+    threads: 128
+    run:
+        shell("{params.executable} -t {input.fasta} --retain_pfam_hits {input.domtblout} --retain_blastp_hits {input.blp} --cpu {params.nodes}")
+
+rule transdecoder_convert:
+    input:
+        fasta = "transcripts.fasta",
+        gff3 = "transcripts.fasta.transdecoder.gff3",
+        gtf="transcripts.gff3"
+    output:
+        gff3 = "transcripts.genes.gff3"
+    params:
+        executable_gff3=config["executables"]["transdecoder"]["convertgff3"],
+        executable_genome=config["executables"]["transdecoder"]["convertgenome"],
+        nodes = config["transdecoder"]["convert"]["nodes"],
+        memory = config["transdecoder"]["convert"]["memory"],
+        job_name = "converting",
+        log = config['transdecoder']['log']
+    resources:
+        load = 1
+    threads: 1
+    run:
+        shell("{params.executable_genome} {input.gff3} {input.gtf} {input.fasta} > {output.gff3}")
+
+# nohup python ~/software/miniconda3/envs/annotation/bin/snakemake -s Snakefile --cluster-config clust.json --configfile config.yaml --jobs 2000 --cluster '{cluster.account}' --rerun-incomplete --restart-times 1&  -np

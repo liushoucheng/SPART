@@ -1,0 +1,130 @@
+# the following section defines all inputs
+data:
+# add paths to ISOseq data sets. Each data set as a separate line
+    longnucl:
+        ds1: <path to ISOseq samples>
+# add paths to reference proteins
+    refprot:
+        triticeae: <path to protein sequences>
+# add paths to RNAseq data sets. Create a data set entry for different libaries. DS1 is an example for paired-end data; DS2 is single-ended
+    rnaseq:
+        ds1: # name of first data set
+            LIB1: # name of first library
+                1:
+                    - <path to RNAseq paired data read1; lane 1>
+                    - <path to RNAseq paired data read1; lane 2>
+                2:
+                    - <path to RNAseq paired data read2; lane 1>
+                    - <path to RNAseq paired data read2; lane 2>
+        ds2: # name of second data set
+            LIB2: # name of second library
+                1:
+                    - <path to RNAseq single read1; lane 1>
+                    - <path to RNAseq single read1; lane 2>
+    hisat2db: <path to hisat2 index>
+    gmap:
+        dbdir: <path gmap database directory>
+        dbname: <name of gmap database>
+    gth:
+        chr1: <path to genome or chromosome sequence>
+    genome: <path to genome>
+    transdecoder:
+        pfamhmm: Pfam-A.hmm
+        blastp: db
+    cocla:
+        unimag: <path to reference database 1> 
+        unipoa: <path to reference database 2> 
+        trep: <path to transposon database> 
+
+# the following section defines all executables and parameters
+hisat2:
+    arguments: -t --dta --no-unal --max-intronlen 50000
+    memory: 24G
+    nodes: 8
+    threads: 8
+    job_name: hisat2
+    log: "hisat2.log"
+    jobs: 4
+
+
+stringtie:
+    arguments: -m 150 -t -f 0.3
+    memory: 4G
+    nodes: 8
+    threads: 8
+    job_name: stringtie
+    log: "stringtie.log"
+
+
+gmap:
+    arguments: -K 50000
+    memory: 16G
+    nodes: 8
+    threads: 8
+    job_name: gmap
+    log: "gmap.log"
+
+gth:
+    arguments: -species rice -startcodon -finalstopcodon -gcmaxgapwidth 50000 -gcmincoverage 70 -paralogs -prseedlength 7 -prhdist 4
+    memory: 5G
+    nbatches: 100
+    nodes: 1
+    threads: 1
+    job_name: gth
+    log: "gth.log"
+
+
+transdecoder:
+    job_name: transdecoder
+    log: "transdecoder.log"
+    nbatches: 1000
+    predict:
+        nodes: 128
+        memory: 8G
+    convert:
+        nodes: 1
+        memory: 8G
+    stringtie:
+        memory: 8G
+        nodes: 1
+        threads: 1
+    hmmscan:
+        memory: 2G
+        nodes: 1
+        threads: 1
+    blastp:
+        memory: 8G
+        nodes: 1
+        threads: 1
+
+
+cocla:
+    nbatches: 100
+    memory: 1G
+    nodes: 1
+    evalue: 10
+    job_name: cocla
+    version: <number>
+    prefix: <"short name of genome">
+    unipoa_threshold: 0.95 #complete
+    unimag_threshold: 0.95 #reviewed
+    repeat_threshold: 0.95 #trep
+
+executables:
+    blastp: blastp
+    cuffcompare: cuffcompare
+    gffread: gffread
+    gth: gth 
+    gmap: gmap.sse42
+    hmmscan: hmmscan
+    hisat2: hisat2
+    samtools: samtools
+    bamtools: bamtools
+    stringtie: stringtie
+    transdecoder:
+        extract: <path to cufflinks_gtf_genome_to_cdna_fasta.pl>
+        convertgff3: 
+        convertgenome: cdna_alignment_orf_to_genome_orf.pl
+        longorfs: TransDecoder.LongOrfs
+        predict: TransDecoder.Predict
+
