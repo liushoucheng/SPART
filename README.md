@@ -254,6 +254,10 @@ Assembly and merge
 stringtie -j 2 -c 2 -m 150 -f 0.3 -G ${reference annotation} -l rna-seq -t -p ${threads} -l "$profix" -A "$profix"gene_abund.tab -C "$profix"cov_refs.gtf -o "$profix".gtf "$profix"Aligned.sortedByCoord.out.bam
 stringtie --merge -p 96 -m 150 -c 10 -G ${reference annotation} -l rna_merge -o rna_all.gtf { gtf_list | strg1.gtf ...}
 ```
+TransDecoder
+```sh
+python snakemake -s Snakefile --cluster-config clust.json --configfile config.yaml --jobs 2000 --cluster '{cluster.account}' --rerun-incomplete --restart-times 1
+```
 #### ISO-seq
 Build genome index
 ```sh
@@ -262,6 +266,10 @@ minimap2 -t 96 -I 16G -d $mmi $genome
 Align && Correct && Collapse
 ```sh
 flair 123 --mm2_args=-I15g,-axsplice:hq,-uf,-secondary=no -g $genome -r $iso_seq --mm_index $mmi -f $gtf -o flair.output --temp_dir temp_flair --stringent --no_gtf_end_adjustment --check_splice --generate_map --trust_end -t 96 --annotation_reliant generate --junction_bed $stringtie.bed
+```
+TransDecoder
+```sh
+python snakemake -s Snakefile --cluster-config clust.json --configfile config.yaml --jobs 2000 --cluster '{cluster.account}' --rerun-incomplete --restart-times 1
 ```
 #### Homology protein
 miniprot
