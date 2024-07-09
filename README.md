@@ -286,8 +286,3 @@ docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/d
 ##### ISO-seq && Homology protein
 docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/data -v "$PWD":"$PWD" katharinahoff/playground:devel braker.pl --workingdir="$PWD" --species=CS-IAAS --softmasking --genome=CS-IAAS_v1.softmask.fasta --gff3 --nocleanup --bam=iso_seq.bam --prot_seq=${Homology protein} --threads ${threads} --BAMTOOLS_PATH= --AUGUSTUS_BIN_PATH=
 ```
-# Contacts
-
-Shoucheng Liu (liusc_work@163.com)
-
-Xiaopeng Li (xiaopeng.li@pku-iaas.edu.cn)
