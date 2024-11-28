@@ -50,6 +50,8 @@ List of tools assumed loadable or accessible with no path are:
 
 * [vcf_merge_t2t.py](https://github.com/kishwarshafin/T2T_polishing_scripts/blob/master/polishing_merge_script/vcf_merge_t2t.py)
 
+* [miniprot_GFF_2_EVM_alignment_GFF3.py](https://github.com/EVidenceModeler/EVidenceModeler/blob/master/EvmUtils/misc/miniprot_GFF_2_EVM_alignment_GFF3.py)
+
 ### <a name="pipe"></a>Using snakemake to run the pipeline can be assembled to the chromosome level but may contain gaps that require the rest to be done manually.(Exclude Verkko,Bionano DLS Map,Telomere determination and patch,Centromeric region analysis,Variant calls and Evaluation):
 * [Download the example in SPART/example/]( https://gofile.me/77wE8/Vj6Vlp1LK)
 * [Download the digest_genome.py of HiC-Pro in SPART/]( https://github.com/nservant/HiC-Pro/blob/master/bin/utils/digest_genome.py)
@@ -276,7 +278,7 @@ miniprot
 ```sh
 miniprot -t96 -d CS-IAAS_v1.softmask.mpi CS-IAAS_v1.softmask.fasta
 miniprot -It96 --gff CS-IAAS_v1.softmask.mpi ${Homology protein} > miniprot.gff3
-python Genome-annotation-pipeline-main/scripts/miniprot.py miniprot.gff3 > protein_alignments.gff3
+python miniprot_GFF_2_EVM_alignment_GFF3.py miniprot.gff3 > protein_alignments.gff3
 ```
 #### Ab initio gene prediction
 Braker3
