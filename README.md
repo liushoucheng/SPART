@@ -291,5 +291,10 @@ docker run -c ${threads} --user 1000:100 -v /tmp:/tmp -v /home:/home -v /data:/d
 ```
 ## contacts
 Shoucheng Liu (liusc_work@163.com)
-
 Xiaopeng Li (xiaopeng.li@pku-iaas.edu.cn)
+
+## <a name="cite"></a>Citating SPART
+If you use SPART in your work, please cite:
+
+Liu, S., Li, K., Dai, X. et al. A telomere-to-telomere genome assembly coupled with multi-omic data provides insights into the evolution of hexaploid bread wheat. Nat Genet (2025). 
+https://doi.org/10.1038/s41588-025-02137-x
