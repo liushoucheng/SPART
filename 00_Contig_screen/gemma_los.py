@@ -1,19 +1,15 @@
 import os
 import re
-from numpy import transpose
-import pandas as pd
-import numpy as np
 import sys
+
 i = 0
 b = 0
 c = []
 c1 = []
-#message1 = []
 d = {}
 f = {}
 d1 = {}
 d2 = {}
-fi = 'GWAS.assoc_1.txt'
 files = sys.argv[1]
 a=0
 c=0
@@ -43,18 +39,3 @@ with open(files) as file_object:
             if int(line2[1])/2 < d_value:
                 print(config_name)
                 c=1
-
-        # if '\tLachesis_group' in line:
-        #     line1 = line.split("\n")
-        #     line2 = line1[0].split("\t")
-        #     line1 = line2[1].split(":")
-        #     line1 = line1[0].split("achesis_group")
-        #     #print(line1[1])
-        #     message = line1[1]
-        #     for i in range(11):
-        #         message = message + '\t' + line2[i+1]
-        #     with open(fi, 'a') as file_object:
-        #         file_object.write(message + '\n')
-        # else:
-        #     with open(fi, 'a') as file_object:
-        #         file_object.write(line)
