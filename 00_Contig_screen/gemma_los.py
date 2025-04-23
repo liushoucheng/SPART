@@ -1,8 +1,10 @@
 import argparse
-
+import os
+import re
+import sys
 # 参数解析
 parser = argparse.ArgumentParser(description="Filter config names based on fixed total length threshold.")
-parser.add_argument("input_file", help="Path to the input TSV file")
+parser.add_argument("input_file", help="Path to the input paf file")
 parser.add_argument("--length", type=int, required=True, help="Threshold length to  aligned printing")
 
 args = parser.parse_args()
