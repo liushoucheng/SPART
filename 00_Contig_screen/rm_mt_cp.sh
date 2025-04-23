@@ -8,8 +8,8 @@ minimap2 -t $threads -x asm5 $mt $ref> mitochondrion.paf
 
 minimap2 -t $threads -x asm5 $cp $ref> chloroplast.paf
 
-python gemma_los.py mitochondrion.paf  --length 5000 > mitochondrion.txt
-python gemma_los.py chloroplast.paf   --length 5000 > chloroplast.txt
+python gemma_los.py mitochondrion.paf  --length 100 > mitochondrion.txt
+python gemma_los.py chloroplast.paf   --length 100 > chloroplast.txt
 
 seqkit grep -v -f chloroplast.txt $ref > wheat_remove_cp.fa
 
