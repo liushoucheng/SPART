@@ -1,7 +1,7 @@
 # SPART  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14551115.svg)](https://doi.org/10.5281/zenodo.14551115) 
 [![Published in Nat Genet](https://img.shields.io/badge/Published%20in-NatGenet-blue.svg)](https://doi.org/10.1038/s41588-025-02137-x)
-![Citation Badge](https://api.juleskreuer.eu/citation-badge.php?doi=10.1038/s41588-025-02137-x)
+![Citation Badge]([https://api.juleskreuer.eu/citation-badge.php?doi=10.1038/s41588-025-02137-x](https://badge.dimensions.ai/details/id/pub.1187376286))
 
 SPART, a Semi-automated pipeline for assembling reference sequence of telomere-to-telomere (T2T). 
 <img src="https://github.com/liushoucheng/SPART/blob/main/pic/pipeline.jpg" width="60%">
