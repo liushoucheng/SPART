@@ -1,9 +1,114 @@
 <!doctype html>
 <html lang="zh-CN">
-<meta charset="utf-8">
-<title>Dimensions Badge</title>
-<span class="__dimensions_badge_embed__"
-      data-doi="10.1038/s41588-025-02137-x"
-      data-legend="always"></span>
-<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dimensions 引用徽章 · 10.1038/s41588-025-02137-x</title>
+  <meta name="description" content="在 GitHub Pages 上展示 Dimensions 引用徽章（DOI: 10.1038/s41588-025-02137-x）" />
+  <style>
+    :root {
+      --bg: #0b0c10; /* 深色背景，适合暗色主题 */
+      --fg: #e5e7eb; /* 主文字颜色 */
+      --muted: #9ca3af; /* 次要文字 */
+      --card: #111827; /* 卡片背景 */
+      --accent: #60a5fa; /* 强调色 */
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      display: grid;
+      place-items: center;
+    }
+    .wrap {
+      max-width: 720px;
+      padding: 32px 24px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+    }
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .doi {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      background: rgba(96, 165, 250, 0.08);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      color: #bfdbfe;
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+    .hint { font-size: 13px; color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Dimensions 引用徽章</h1>
+      <p>本页将从 <code>badge.dimensions.ai</code> 加载脚本，在下方渲染 DOI 对应的交互式引用徽章。</p>
+      <div class="row" style="margin-bottom: 8px;">
+        <span class="doi" title="点我跳转到 DOI 登记页">
+          <a href="https://doi.org/10.1038/s41588-025-02137-x" target="_blank" rel="noopener">DOI: 10.1038/s41588-025-02137-x</a>
+        </span>
+      </div>
+
+      <!--
+        ✅ 关键嵌入：
+        - class 必须是 __dimensions_badge_embed__
+        - data-doi 必须是纯 DOI（不要加 https://doi.org/ 前缀）
+        - data-style 可选值常见：small_circle / large_circle / large_rectangle
+        - data-legend：hover-right / hover-left / hover-top / hover-bottom / always
+        - data-hide-zero-citations="true"（可选）为 0 次引用时隐藏徽章
+
+        如需切换样式，把 data-style 改一下即可。
+      -->
+      <div class="row" style="margin: 12px 0 6px;">
+        <span
+          class="__dimensions_badge_embed__"
+          data-doi="10.1038/s41588-025-02137-x"
+          data-style="large_rectangle"
+          data-legend="hover-right">
+        </span>
+      </div>
+
+      <p class="hint">若徽章未出现，请确认浏览器已允许加载外部脚本，或稍后刷新重试。</p>
+
+      <footer class="hint">
+        • 你也可以在 README 中放一个指向本页的链接：
+        <code>[查看 Dimensions 徽章](https://&lt;用户名&gt;.github.io/&lt;仓库名&gt;/badge.html)</code>
+      </footer>
+    </section>
+  </main>
+
+  <!-- 必须：从官方域加载渲染脚本。脚本可放在页底，避免阻塞。 -->
+  <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+
+  <!-- 无脚本时的兜底信息（例如某些隐私插件关闭了外链脚本） -->
+  <noscript>
+    <div style="margin-top:12px;color:#fca5a5">⚠️ 你的浏览器已禁用 JavaScript，无法渲染 Dimensions 徽章。你仍可通过上面的链接访问 DOI 页面。</div>
+  </noscript>
+</body>
 </html>
