@@ -135,6 +135,7 @@ SPART/01_Contig_scaffolding/yahs.sh $enzyme $ref $bed/bam/bin $profix
 query=# query fasta file (uncompressed or bgzipped)
 ref=# target fasta file (uncompressed or bgzipped)
 region=# output directory
+Ensure the _submit_telomere.sh script is downloaded to the SPART/02_Gap_patching/ directory beforehand. It is required for the telomere patching step and can be retrieved from: [_submit_telomere.sh]( https://github.com/VGP/vgp-assembly/blob/master/pipeline/telomere/_submit_telomere.sh)
 SPART/02_Gap_patching/wfmash_ragtag.sh $query $ref $region
 ```
 #### Manual operation
